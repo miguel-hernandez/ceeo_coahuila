@@ -1,0 +1,223 @@
+.bg-color-1 {
+  background-color: #3a61aa !important;
+}
+
+.panel-heading .panel-title {
+  font-size: 24px;
+  color: #ffffff;
+  text-transform: none;
+  font-weight: 700;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.panel .panel-body {
+
+  border-radius: 0 0 7px 7px;
+}
+
+
+/******************************************************************************** PANELs */
+.panel_head{
+	background-color: #225D99 !important;
+	border: #225D99 1px solid !important;
+	text-align: center;
+	font-weight: bold;
+	text-transform: uppercase;
+	width: 100% !important;
+}
+
+
+/******************************************************************************** TABLE */
+.table_head{
+	background-color: #8ECAD5;
+	text-align: center !important;
+	font-weight: bold;
+	/*text-transform: uppercase;*/
+	width: 100% !important;
+}
+
+/******************************************************************************** TAGs */
+textarea{
+  resize: none;
+}
+
+footer{
+	margin-top: 15px;
+}
+
+/******************************************************************************** MODAL */
+.modal_head{
+  /*background-color: #36BA78 !important;*/
+  background-color: #225D99 !important;
+  color: #FFFFFF !important;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  /*text-transform: uppercase;*/
+  text-transform:none;
+  /*border-bottom: rgba(73,155,234,1) 2px solid;*/
+  border-radius: 4px 4px 0px 0px;
+}
+.modalhead{
+ background-color:#546e7a;
+ color: #FFFFFF !important;
+ font-size: 18px;
+ text-align:center;
+ padding: 4px;
+ font-weight: bold;
+ text-transform:none;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.modal80{
+  width: 80% !important;
+}
+
+/******************************************************************************** DETALLES */
+.margin_top_7{
+  margin-top: 7px !important;
+}
+
+.margintop10{
+  margin-top: 10px;
+}
+
+.bold_white{
+  color: #FFFFFF !important;
+  font-weight: bold !important;
+  z-index: -1 !important;
+	font-size: 24px;
+	opacity: 1;
+}
+
+.img_icono{
+  width: 20px;
+}
+
+/**************************************************************************** Radio button BÚSQUEDA DE ESCUELAS */
+.radiobtn {
+  display: none;
+}
+.buttons {
+  /*margin-left: -40px;*/
+}
+.buttons li {
+  display: block;
+}
+.buttons li label{
+  padding-left: 30px;
+  position: relative;
+  left: -25px;
+  text-transform: none;
+}
+.buttons li label:hover {
+  cursor: pointer;
+
+  color: #04C3C2;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.buttons li span {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  border: 2px solid #ccc;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+}
+.radiobtn:checked + span::before{
+  content: '';
+  border: 2px solid #fff;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  /*background-color: #c3e3fc;*/
+  background-color: #04C3C2;
+}
+.radiobtn:hover{
+  background-color : #F98000;
+  border: #F98000 1px solid;
+  font-weight: bold;
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+
+/*************************************************************** ESTILO PARA EL LOADER DENTRO DEL SWWET ALERT 2*/
+.loader {
+	text-align: center;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/*************************************************************** BOTÓN IR ARRIBA*/
+.ir-arriba {
+	display:none;
+	padding:20px;
+	background:#024959;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+	z-index:99 !important;
+}
+
+/*************************************************************** JQuery validate*/
+label.error { float: none;
+              color: red;
+              padding-left: .5em;
+              vertical-align: middle;
+              font-size: 12px; }
+
+
+							/* ------------------------ ESTILO PARA EL LOADER DENTRO DEL SWWET ALERT 2 */
+
+							.loader {
+								text-align: center;
+								border: 16px solid #f3f3f3;
+								border-radius: 50%;
+								border-top: 16px solid #3498db;
+								width: 120px;
+								height: 120px;
+								-webkit-animation: spin 2s linear infinite;
+								animation: spin 2s linear infinite;
+							}
+
+							@-webkit-keyframes spin {
+								0% {
+									-webkit-transform: rotate(0deg);
+								}
+
+								100% {
+									-webkit-transform: rotate(360deg);
+								}
+							}
+
+							@keyframes spin {
+								0% {
+									transform: rotate(0deg);
+								}
+
+								100% {
+									transform: rotate(360deg);
+								}
+							}
