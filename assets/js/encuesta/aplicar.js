@@ -1,5 +1,4 @@
 $("#div_contenedor_preguntas").on("submit", "#form_cuestionario_doc", function(event){
-  event.preventDefault();
   var error = 0;
   $('.requerido').each(function(i, elem){
       switch (elem.type) {
@@ -19,6 +18,7 @@ $("#div_contenedor_preguntas").on("submit", "#form_cuestionario_doc", function(e
     });
 
     if(error > 0){
+      event.preventDefault();
       Helpers.alert("Atienda los errores indicados", "error");
     }
   });
