@@ -1,3 +1,105 @@
+// $("#texto2").blur(function(){
+//   $(this).hide("slow");
+// });
+$(document).on('blur','.textarea_blur', function(e) {
+  e.preventDefault();
+  e.stopImmediatePropagation(); // evita que se ejecute 2 veces el evento
+
+  let idpregunta = $(this).data('idpregunta');
+  let valor = $(this).val();
+
+  for (var i = 0; i < array_ids_ok.length; i++) {
+    if((array_ids_ok[i]['tipo'] == 1) || (array_ids_ok[i]['tipo'] == '1')){ // sólo textarea
+      if(array_ids_ok[i]['idpregunta'] == idpregunta){
+        array_ids_ok[i]['valores'] = valor;
+      }
+    }
+  }
+
+  console.info("array_ids_ok final textarea");
+  console.info(array_ids_ok);
+
+});
+
+
+$(document).on('change','.checkbox_change',function(e) {
+     e.preventDefault();
+     e.stopImmediatePropagation(); // evita que se ejecute 2 veces el evento
+
+     let idpregunta = $(this).data('idpregunta');
+     idpregunta = String(idpregunta);
+
+     let valor = $(this).val();
+
+     console.info("idpregunta: "+idpregunta);
+
+     console.info("array_ids");
+     console.info(array_ids);
+
+     console.info("array_ids_ok");
+     console.info(array_ids_ok);
+
+
+     let index =  array_ids.indexOf(idpregunta);
+     console.info("index: "+index);
+
+
+     /*
+     let index_ok =  array_ids_ok.indexOf(idpregunta);
+     console.info("index_ok: "+index_ok);
+     */
+
+     if($(this).is(":checked")) {
+        /*
+        let valor = $(this).val();
+        alert("idpregunta: "+idpregunta);
+        alert("valor: "+valor);
+        let str_concat = idpregunta+'-'+valor;
+
+        let actual = $("#itxt_idpregunta_"+idpregunta).val();
+        let nuevo = actual+'/'+str_concat;
+        $("#itxt_idpregunta_"+idpregunta).val(nuevo);
+        */
+
+
+
+        let array_aux = [];
+        for (var i = 0; i < array_ids_ok.length; i++) {
+          if(array_ids_ok[i]['idpregunta'] == idpregunta){
+            array_aux['idpregunta'] = idpregunta;
+            array_aux['valor'] = valor;
+
+            array_ids_ok[i]['valores'].push(array_aux);
+
+
+          }
+        }
+
+     }else{
+       for (var i = 0; i < array_ids_ok.length; i++) {
+         if(array_ids_ok[i]['idpregunta'] == idpregunta){
+
+           for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
+             if(array_ids_ok[i]['valores'][j]['valor'] == valor){
+               array_ids_ok[i]['valores'].splice(j);
+             }
+           }
+
+           // array_aux['idpregunta'] = idpregunta;
+           // array_aux['valor'] = valor;
+
+           // array_ids_ok[i]['valores'].splice(array_aux);
+
+
+         }
+       }
+     }
+
+     console.info("array_ids_ok final");
+     console.info(array_ids_ok);
+});
+
+
 $("#btn_encuesta_guardar").click(function(e){
   e.preventDefault();
   if(!Aplicar.validar()){
@@ -97,12 +199,48 @@ $("#btn_encuesta_guardar").click(function(e){
     },
 
     guardar : (array_ok) => {
+      console.info("Para enviar");
+      console.info(array_ids_ok);
+
+      for (var i = 0; i < array_ids_ok.length; i++) {
+          let valores = array_ids_ok[i]['valores'];
+          console.info("valores");
+          console.info(valores);
+          // let valores_ok = JSON.stringify(valores);
+          // array_ids_ok[i]['valores'] = valores_ok;
+
+          if((array_ids_ok[i]['tipo'] == 2) || (array_ids_ok[i]['tipo'] == '2')){ // sólo checkbox
+            for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
+              
+              // array_ids_ok[i]['valores'][j] = JSON.stringify(array_ids_ok[i]['valores'][j]);
+              // Object.assign({}, array_ids_ok[i]['valores'][j]);
+              // $.extend({}, array_ids_ok[i]['valores']);
+              // var arr = array_ids_ok[i]['valores'];
+              // var obj = _.extend({}, a);
+              // Object.setPrototypeOf(arr, Object.prototype); // now no longer an array, still an object
+              // console.log(obj);
+            }
+
+          }
+
+          /*
+          for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
+            if(array_ids_ok[i]['valores'][j]['valor'] == valor){
+              array_ids_ok[i]['valores'].splice(j);
+            }
+          }
+          */
+      }
+
+      console.info("MAS Para enviar");
+      console.info(array_ids_ok);
+
       var ruta = base_url+"Encuesta/guardar";
       $.ajax({
         async: true,
         url: ruta,
         method: 'POST',
-        data: {'array_datos': array_ok},
+        data: { 'array_datos': array_ids_ok },
         beforeSend: function( xhr ) {
           $("#wait").modal("show");
         }
