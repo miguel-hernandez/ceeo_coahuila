@@ -5,13 +5,14 @@ class Administrador extends CI_Controller {
 
     function __construct(){
         parent::__construct();
+        $this->load->helper('appweb');
         $this->load->library('Utilerias');
     }
 
 
     public function index()
     {
-        if(Utilerias::verifica_sesion_redirige($this)){
+        if(verifica_sesion_redirige($this)){
           $data["titulo"] = "COORDINADOR";
           $usuario = $this->session->userdata[DATOSUSUARIO];
           // echo "<pre>"; print_r($usuario); die();

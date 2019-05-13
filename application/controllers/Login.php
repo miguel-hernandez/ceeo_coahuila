@@ -5,6 +5,7 @@ class Login extends CI_Controller {
 
 		function __construct() {
 			parent::__construct();
+			$this->load->helper('appweb');
 			$this->load->helper('form');
 			$this->load->library('Utilerias');
 			$this->load->model('Seguridad_model');
@@ -47,7 +48,7 @@ class Login extends CI_Controller {
 
 					$tipo = ERRORMESSAGE;
 
-					$this->session->set_flashdata(MESSAGEREQUEST, Utilerias::get_notification_alert($mensaje, $tipo));
+					$this->session->set_flashdata(MESSAGEREQUEST, get_notification_alert($mensaje, $tipo));
 
 					redirect('login', 'refresh');
 

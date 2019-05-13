@@ -24,4 +24,30 @@
           }
       	}// verifica_sesion_redirige()
     }
+
+    if(!function_exists('get_notification_alert')){
+      function get_notification_alert($mensaje, $tipo, $cerrar = TRUE) {
+              $type = "alert-info";
+
+              switch ($tipo) {
+                  case SUCCESMESSAGE:
+                      $type = "alert-success ";
+                      break;
+                  case ERRORMESSAGE:
+                      $type = "alert-danger ";
+                      break;
+              }
+
+              return "
+                  <div class='alert ".$type." alert-dismissable'>
+                    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                    <center><strong>".$mensaje."</strong></center>
+                  </div>
+              ";
+
+
+      }// get_notification_alert
+    }
+
+
 ?>
