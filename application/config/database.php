@@ -80,6 +80,7 @@ $db['default'] = array(
 	'username' => 'proye7nb_adm',
 	'password' => 'ceeo.adm.123',
 	'database' => 'proye7nb_encuesta_ch',
+	'dbport'   => '3306',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

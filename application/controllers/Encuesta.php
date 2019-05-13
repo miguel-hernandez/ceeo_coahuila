@@ -11,7 +11,7 @@ class Encuesta extends CI_Controller {
   }
 
   function get_xidusuario(){
-    if(Utilerias::verifica_sesion_redirige($this)){
+    if(verifica_sesion_redirige($this)){
 
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $result = $this->Encuesta_model->get_xidusuario($usuario["idusuario"]);
@@ -31,12 +31,12 @@ class Encuesta extends CI_Controller {
       );
 
       envia_datos_json(200, $response, $this);
-    }
+    }// verifica_sesion_redirige()
   }// get_xidusuario()
 
 
   public function aplicar(){
-    if(Utilerias::verifica_sesion_redirige($this)){
+    if(verifica_sesion_redirige($this)){
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $tipo = $usuario["tipo"];
       $data["titulo"] = "";
@@ -58,7 +58,7 @@ class Encuesta extends CI_Controller {
   }// aplicar()
 
   public function get_cuestions(){
-    if(Utilerias::verifica_sesion_redirige($this)){
+    if(verifica_sesion_redirige($this)){
       $preguntas = $this->Encuesta_model->get_cuestions();
       $data['array_preguntas'] = $preguntas;
       Utilerias::pagina_basica($this, "encuesta/aplicar", $data);
@@ -84,7 +84,7 @@ class Encuesta extends CI_Controller {
       }
       redirect("encuestador", "refresh");
 
-    
+
   }// guardar()
 
 

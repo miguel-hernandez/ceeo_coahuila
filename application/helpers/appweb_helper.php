@@ -17,8 +17,10 @@
 
     if(!function_exists('verifica_sesion_redirige')){
         function verifica_sesion_redirige($contexto) {
-          if (!hay_sesion_abierta($contexto)) {
-              redirect('login', 'refresh');
+          if (hay_sesion_abierta($contexto)) {
+              return true;
+          }else{
+            redirect('login', 'refresh');
           }
       	}// verifica_sesion_redirige()
     }
