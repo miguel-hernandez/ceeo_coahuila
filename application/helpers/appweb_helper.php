@@ -15,4 +15,11 @@
       	}// hay_sesion_abierta()
     }
 
+    if(!function_exists('verifica_sesion_redirige')){
+        function verifica_sesion_redirige($contexto) {
+          if (!hay_sesion_abierta($contexto)) {
+              redirect('login', 'refresh');
+          }
+      	}// verifica_sesion_redirige()
+    }
 ?>

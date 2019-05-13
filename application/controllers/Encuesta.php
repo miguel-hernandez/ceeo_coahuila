@@ -66,10 +66,10 @@ class Encuesta extends CI_Controller {
   }// get_cuestions()
 
   public function guardar(){
-    echo "<pre>";
-    print_r($_POST);
-    die();
-    if(Utilerias::verifica_sesion_redirige($this)){
+
+
+
+
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $atendio = $this->input->post('atendio');
       $idcct = $this->input->post('idcct');
@@ -83,7 +83,8 @@ class Encuesta extends CI_Controller {
         }
       }
       redirect("encuestador", "refresh");
-    }
+
+    
   }// guardar()
 
 
