@@ -11,7 +11,7 @@
       <div id="div_contenedor_preguntas">
 
 
-      <form action='<?= base_url('Encuesta/guardar') ?>' method='post' id='form_cuestionario_doc'>
+      <form id='form_cuestionario_doc'>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { ?>
         <div class="row margintop10">
@@ -31,9 +31,9 @@
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
                 <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta'].$key ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
+                  <input class='requerido' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
                 </label>
-                <label id="label_<?= $pregunta['idpregunta'].$key ?>" class="error"></label>
+                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
                 </div>
               <?php } ?>
             <?php } ?>
@@ -48,7 +48,7 @@
           <a href="<?= base_url('Encuestador') ?>" class="btn btn-default btn-block">Regresar</a>
         </div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-            <input type='submit' value='Guardar' class='btn btn-primary btn-block'>
+            <button id="btn_encuesta_guardar" type='button' class='btn btn-primary btn-block'>Guardar</button>
         </div>
 
       </div><!-- .row -->
