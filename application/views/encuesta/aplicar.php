@@ -31,9 +31,9 @@
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
                 <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
+                  <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta'].$key ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
                 </label>
-                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
+                <label id="label_<?= $pregunta['idpregunta'].$key ?>" class="error"></label>
                 </div>
               <?php } ?>
             <?php } ?>
