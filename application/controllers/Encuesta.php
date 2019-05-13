@@ -65,14 +65,12 @@ class Encuesta extends CI_Controller {
   }// get_cuestions()
 
   public function guardar(){
-
-
-
-
+    echo "<pre>";print_r($_POST);die();
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $atendio = $this->input->post('atendio');
       $idcct = $this->input->post('idcct');
       $idaplica = $this->Aplicar_model->insert_aplica($usuario['idusuario'], $idcct, $atendio);
+
       foreach ($_POST as $key => $value) {
         if($key != 'atendio' && $key != 'idcct'){
           $porciones = explode("-", $key);
