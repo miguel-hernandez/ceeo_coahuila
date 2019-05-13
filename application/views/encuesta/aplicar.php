@@ -20,18 +20,14 @@
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <div class='col-xs-12'>
-                <textarea class='form-control requerido' rows='2' name="<?= $pregunta['idpregunta'] ?>"
-                  data-idpregunta = '<?= $pregunta['idpregunta'] ?>'
-                  data-npregunta = '<?= $pregunta['npregunta'] ?>'
-                  data-idtipopregunta = '<?= $pregunta['idtipopregunta'] ?>'
-                  ></textarea>
+                <textarea class='form-control requerido' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
               </div>
             <?php } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
-              <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
+              <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { $key++;?>
                 <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
+                  <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta']."_".$key ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
                 </label>
                 <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
                 </div>
