@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 $(function() {
-  Encuesta.listar();      
+  Encuesta.listar();
 });
 
 
