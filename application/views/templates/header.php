@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> COAHUILA - <?= $titulo ?> </title>
 
-  <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png') ?>">
+  <link rel="shortcut icon" href="<?= base_url('assets/img/logotipo1.png') ?>">
 
   <link rel="stylesheet" media="screen" href="<?= base_url('assets/bootstrap337/css/bootstrap.min.css') ?>" >
   <!-- <link rel="stylesheet" media="screen" href="<?= base_url('assets/sweetalert2/sweetalert2.min.css') ?>"> -->
