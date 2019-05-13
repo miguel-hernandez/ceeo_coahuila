@@ -29,7 +29,7 @@
                 <label class='checkbox-inline'>
                   <input class='requerido' type='checkbox' name="<?= $pregunta['idpregunta']."_".$key ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
                 </label>
-                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
+                <label id="label_<?= $pregunta['idpregunta'].$key ?>" class="error"></label>
                 </div>
               <?php } ?>
             <?php } ?>
