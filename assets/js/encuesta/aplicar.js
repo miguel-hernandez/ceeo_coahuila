@@ -1,8 +1,7 @@
 $("#div_contenedor_preguntas").on("submit", "#form_cuestionario_doc", function(event){
-  // alert("entro");
-
   event.preventDefault();
-  var error = 0;
+
+var error = 0;
   var arr_respuestas= [];
   $('.requerido').each(function(i, elem){
       switch (elem.type) {
@@ -29,6 +28,7 @@ $("#div_contenedor_preguntas").on("submit", "#form_cuestionario_doc", function(e
     console.log(arr_respuestas);
 
     if(error > 0){
+      event.preventDefault();
       Helpers.alert("Atienda los errores indicados", "error");
     }
     else {

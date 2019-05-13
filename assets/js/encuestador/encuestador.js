@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 
 $(function() {
-  Encuesta.listar();      
+  Encuesta.listar();
 });
 
 
@@ -44,8 +44,9 @@ let Encuesta = {
       );
       obj_grid.load();
     })
-    .fail(function(e) {
-      console.error("Error in read()"); console.table(e);
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      // console.error("Error in read()"); console.table(e);
+      $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
     });
   }
 

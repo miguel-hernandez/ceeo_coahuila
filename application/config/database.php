@@ -75,17 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	/*
-	'hostname' => '209.99.16.14',
-	'username' => 'escue9sx_root',
-	'password' => '3st@distic@',
-	'database' => 'escue9sx_ceeo',
-	*/
+
 	'hostname' => '208.91.198.53',
 	'username' => 'proye7nb_adm',
 	'password' => 'ceeo.adm.123',
 	'database' => 'proye7nb_encuesta_ch',
-
+	
+	'dbport'   => '3306',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

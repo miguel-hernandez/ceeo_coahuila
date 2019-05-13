@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> CEEO COAHUILA </title>
 
-  <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png') ?>">
+  <link rel="shortcut icon" href="<?= base_url('assets/img/logotipo1.png') ?>">
   <link href="<?= base_url('assets/bootstrap337/css/bootstrap.min.css') ?>" rel="stylesheet" media="screen">
   <link href="<?= base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" media="screen">
   <link href="<?= base_url('assets/css/estilos-master.css') ?>" rel="stylesheet" media="screen">
