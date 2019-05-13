@@ -5,6 +5,7 @@ class Encuesta extends CI_Controller {
 
   function __construct(){
     parent::__construct();
+    $this->load->helper('appweb');
     $this->load->library('Utilerias');
     $this->load->model('Encuesta_model');
   }
@@ -29,8 +30,7 @@ class Encuesta extends CI_Controller {
 
       );
 
-      Utilerias::enviaDataJson(200, $response, $this);
-      exit;
+      envia_datos_json(200, $response, $this);
     }
   }// get_xidusuario()
 
