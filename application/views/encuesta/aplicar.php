@@ -20,7 +20,11 @@
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <div class='col-xs-12'>
-                <textarea class='form-control requerido' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
+                <textarea class='form-control requerido' rows='2' name="<?= $pregunta['idpregunta'] ?>"
+                  data-idpregunta = '<?= $pregunta['idpregunta'] ?>'
+                  data-npregunta = '<?= $pregunta['npregunta'] ?>'
+                  data-idtipopregunta = '<?= $pregunta['idtipopregunta'] ?>'
+                  ></textarea>
               </div>
             <?php } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
