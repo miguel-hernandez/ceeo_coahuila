@@ -6,7 +6,6 @@ class Encuesta extends CI_Controller {
   function __construct(){
     parent::__construct();
     $this->load->helper('appweb');
-    $this->load->library('Utilerias');
     $this->load->model('Encuesta_model');
   }
 
@@ -53,7 +52,7 @@ class Encuesta extends CI_Controller {
       // echo "despues";
       // echo "<pre>"; print_r($array_preguntas_ok); die();
       $data['array_preguntas'] = $array_preguntas_ok;
-      Utilerias::pagina_basica($this, "encuesta/aplicar", $data);
+      pagina_basica($this, "encuesta/aplicar", $data);
     }// verifica_sesion_redirige()
   }// aplicar()
 
@@ -61,7 +60,7 @@ class Encuesta extends CI_Controller {
     if(verifica_sesion_redirige($this)){
       $preguntas = $this->Encuesta_model->get_cuestions();
       $data['array_preguntas'] = $preguntas;
-      Utilerias::pagina_basica($this, "encuesta/aplicar", $data);
+      pagina_basica($this, "encuesta/aplicar", $data);
     }
   }// get_cuestions()
 

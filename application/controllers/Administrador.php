@@ -6,12 +6,9 @@ class Administrador extends CI_Controller {
     function __construct(){
         parent::__construct();
         $this->load->helper('appweb');
-        $this->load->library('Utilerias');
     }
 
-
-    public function index()
-    {
+    public function index(){
         if(verifica_sesion_redirige($this)){
           $data["titulo"] = "COORDINADOR";
           $usuario = $this->session->userdata[DATOSUSUARIO];
@@ -30,9 +27,9 @@ class Administrador extends CI_Controller {
           // $tipo =
           $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
 
-          Utilerias::pagina_basica($this, "administrador/index", $data);
+          pagina_basica($this, "administrador/index", $data);
         }
-    }//
+    }// index()
 
 
 }

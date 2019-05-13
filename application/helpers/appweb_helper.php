@@ -49,5 +49,14 @@
       }// get_notification_alert
     }
 
+    if(!function_exists('pagina_basica')){
+      function pagina_basica($contexto, $vista = '', $data) {
+          $contexto->load->view('templates/header',$data);
+          $contexto->load->view($vista, $data);
+          $contexto->load->view('templates/footer');
+      }// pagina_basica()
+    }
+
+
 
 ?>

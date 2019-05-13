@@ -7,12 +7,11 @@ class Login extends CI_Controller {
 			parent::__construct();
 			$this->load->helper('appweb');
 			$this->load->helper('form');
-			$this->load->library('Utilerias');
 			$this->load->model('Seguridad_model');
 		}
 
 		public function index(){
-			if (Utilerias::is_session_open($this)) {
+			if (hay_sesion_abierta($this)) {
 				$usuario = $this->session->userdata['datos_usuario_ceeo'];
 				$this->direcciona_user($usuario['idtipousuario']);
 			} else {
@@ -23,7 +22,7 @@ class Login extends CI_Controller {
 
 
 		public function validar_login(){
-			if (Utilerias::is_session_open($this)) {
+			if (hay_sesion_abierta($this)) {
 				$usuario = $this->session->userdata['datos_usuario_ceeo'];
 				// echo "<pre>";
 				// print_r($usuario);

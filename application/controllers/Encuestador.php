@@ -6,7 +6,6 @@ class Encuestador extends CI_Controller {
   function __construct(){
     parent::__construct();
     $this->load->helper('appweb');
-    $this->load->library('Utilerias');
   }
 
 
@@ -16,7 +15,7 @@ class Encuestador extends CI_Controller {
       $tipo = $usuario["tipo"];
       $data["titulo"] = "";
       $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
-      Utilerias::pagina_basica($this, "encuestador/index", $data);
+      pagina_basica($this, "encuestador/index", $data);
     }
   }// index();
 
