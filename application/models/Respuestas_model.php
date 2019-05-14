@@ -6,22 +6,22 @@ class Respuestas_model extends CI_Model {
         parent::__construct();
     }
 
-
-    function insert_respuestas($respuestas, $id_aplica, $ruta_archivos_save){
+    function insert_respuestas($respuestas, $nombre_archivo, $idusuario){
       $fecha = date("Y-m-d H:i:s");
       $band= FALSE;
       // echo "<pre>";print_r($respuestas['array_datos']);die();
       $this->db->trans_start();
-      // $data = array(
-      //   'idusuario' => $idusuario,
-      //   'fcreacion' => $fecha
-      // );
-      // $this->db->insert('aplicar', $data);
-      // $id_aplica = $this->db->insert_id();
+      $data = array(
+        'idusuario' => $idusuario,
+        'fcreacion' => $fecha
+      );
+      $this->db->insert('aplicar', $data);
+      $id_aplica = $this->db->insert_id();
 
       // echo "<pre>";print_r($id_aplica);die();
       if ($id_aplica > 0) {
-        if ($ruta_archivos_save!='') {
+        if ($nombre_archivo!='') {
+          $ruta_archivos_save = "evidencias/{$idusuario}/{$id_aplica}/$nombre_archivo";
           $inserto = $this->insert_response("NULL", $ruta_archivos_save, $id_aplica, 4);
           if ($inserto) {
             $band= TRUE;
@@ -62,13 +62,15 @@ class Respuestas_model extends CI_Model {
       if ($band==TRUE) {
         $this->db->trans_commit();
         // $this->db->trans_rollback();
-        return TRUE;
+        return $id_aplica;
       }
       else {
         $this->db->trans_rollback();
         return FALSE;
       }
     }
+
+
 
     function insert_response($idpregunta, $value, $idaplica, $tipopregunta){
       switch ($tipopregunta) {

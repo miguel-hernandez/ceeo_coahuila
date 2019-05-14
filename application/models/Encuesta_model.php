@@ -17,7 +17,7 @@ class Encuesta_model extends CI_Model {
   }// get_asignadas()
 
   function get_cuestions(){
-    $query = "SELECT *, '' AS array_complemento FROM pregunta WHERE idencuesta = 1 limit 3";
+    $query = "SELECT *, '' AS array_complemento FROM pregunta WHERE idencuesta = 1 ";//limit 3
     return $this->db->query($query)->result_array();
   }
 

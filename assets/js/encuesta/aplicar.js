@@ -264,7 +264,17 @@ $("#btn_encuesta_guardar").click(function(e){
         }
       })
       .done(function( data ) {
+        console.log(data);
         $("#wait").modal("hide");
+        if (data.estatus) {
+          bootbox.alert(data.respuesta, function(){
+            window.location.href = base_url+"Encuestador";
+        });
+        }
+        else {
+          Helpers.alert(data.respuesta, "error");
+        }
+
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
