@@ -28,9 +28,6 @@
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
 
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
-                <?php if($key == 0) { ?>
-                  <input type="text" id="itxt_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
-                <?php } ?>
                 <div class='col-xs-12'>
                 <label class='checkbox-inline'>
                   <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
@@ -45,7 +42,7 @@
       <?php } ?>
 
       <?php $separado_por_comas1 = implode(",", $array_idpreguntas); ?>
-      <input type="text" id="itxt_idpreguntas" value="<?= $separado_por_comas1 ?>">
+      <input type="hidden" id="itxt_idpreguntas" value="<?= $separado_por_comas1 ?>">
 
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
@@ -81,6 +78,7 @@
       array_aux["tipo"] = tipo;
       array_aux["idpregunta"] = idpregunta;
       array_aux["valores"] = [];
+      array_aux["valores_string"] = '';
       array_ids_ok.push(array_aux);
     }
 

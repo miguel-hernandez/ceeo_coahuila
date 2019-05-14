@@ -16,8 +16,8 @@ $(document).on('blur','.textarea_blur', function(e) {
     }
   }
 
-  console.info("array_ids_ok final textarea");
-  console.info(array_ids_ok);
+  // console.info("array_ids_ok final textarea");
+  // console.info(array_ids_ok);
 
 });
 
@@ -31,17 +31,17 @@ $(document).on('change','.checkbox_change',function(e) {
 
      let valor = $(this).val();
 
-     console.info("idpregunta: "+idpregunta);
+     // console.info("idpregunta: "+idpregunta);
 
-     console.info("array_ids");
-     console.info(array_ids);
+     // console.info("array_ids");
+     // console.info(array_ids);
 
-     console.info("array_ids_ok");
-     console.info(array_ids_ok);
+     // console.info("array_ids_ok");
+     // console.info(array_ids_ok);
 
 
      let index =  array_ids.indexOf(idpregunta);
-     console.info("index: "+index);
+     // console.info("index: "+index);
 
 
      /*
@@ -95,8 +95,8 @@ $(document).on('change','.checkbox_change',function(e) {
        }
      }
 
-     console.info("array_ids_ok final");
-     console.info(array_ids_ok);
+     // console.info("array_ids_ok final");
+     // console.info(array_ids_ok);
 });
 
 
@@ -199,19 +199,25 @@ $("#btn_encuesta_guardar").click(function(e){
     },
 
     guardar : (array_ok) => {
-      console.info("Para enviar");
-      console.info(array_ids_ok);
+      // console.info("Para enviar");
+      // console.info(array_ids_ok);
+
 
       for (var i = 0; i < array_ids_ok.length; i++) {
           let valores = array_ids_ok[i]['valores'];
-          console.info("valores");
-          console.info(valores);
+          // console.info("valores");
+          // console.info(valores);
           // let valores_ok = JSON.stringify(valores);
           // array_ids_ok[i]['valores'] = valores_ok;
 
           if((array_ids_ok[i]['tipo'] == 2) || (array_ids_ok[i]['tipo'] == '2')){ // sólo checkbox
-            for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
-              
+            let string_ok = '';
+            for (var j = 0; j < valores.length; j++) {
+              // console.info("valores[j]['valor']");
+              // console.info(valores[j]['valor']);
+              let valor = valores[j]['valor'];
+              // console.info("valor: "+valor);
+              string_ok = string_ok+valor+'/';
               // array_ids_ok[i]['valores'][j] = JSON.stringify(array_ids_ok[i]['valores'][j]);
               // Object.assign({}, array_ids_ok[i]['valores'][j]);
               // $.extend({}, array_ids_ok[i]['valores']);
@@ -220,7 +226,8 @@ $("#btn_encuesta_guardar").click(function(e){
               // Object.setPrototypeOf(arr, Object.prototype); // now no longer an array, still an object
               // console.log(obj);
             }
-
+            string_ok = string_ok.substring(0, string_ok.length - 1);
+            array_ids_ok[i]['valores_string'] = string_ok;
           }
 
           /*
@@ -231,9 +238,23 @@ $("#btn_encuesta_guardar").click(function(e){
           }
           */
       }
+      /*
+      var obj = {};
+      const arrayToObject = (array_ids_ok, keyField) =>
+         array.reduce((obj, item) => {
+           obj[item[keyField]] = item
+           // return obj
+         }, {})
 
-      console.info("MAS Para enviar");
-      console.info(array_ids_ok);
+      console.info("obj");
+      console.info(obj);
+
+
+      // return false;
+      array_ids_ok = JSON.stringify(array_ids_ok);
+      */
+      // console.info("MAS Para enviar");
+      // console.info(array_ids_ok);
 
       var ruta = base_url+"Encuesta/guardar";
       $.ajax({
