@@ -11,7 +11,7 @@
       <div id="div_contenedor_preguntas">
 
 
-      <form action='<?= base_url('Encuesta/guardar') ?>' method='post' id='form_cuestionario_doc'>
+      <form action='<?= base_url('Encuesta/guardar') ?>' method='post' id='form_cuestionario_doc1'>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { ?>
         <div class="row margintop10">

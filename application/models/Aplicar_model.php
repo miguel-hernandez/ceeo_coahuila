@@ -41,14 +41,26 @@ class Aplicar_model extends CI_Model {
        return $this->db->query($str_query)->result_array();
      }// get_visitadas()
 
-     function insert_aplica($idusuario, $idcct, $atendio){
+     // function insert_aplica($idusuario, $idcct, $atendio){
+     //
+     //  $fecha = date("Y-m-d H:i:s");
+     //  $data = array(
+     //    'idusuario' => $idusuario,
+     //    'idcct' => $idcct,
+     //    'fcreacion' => $fecha,
+     //    'atendio' => $atendio
+     //  );
+     //
+     //  $this->db->insert('aplicar', $data);
+     //  $id = $this->db->insert_id();
+     //  return $id;
+     // }
 
+     function insert_aplica($idusuario){
       $fecha = date("Y-m-d H:i:s");
       $data = array(
         'idusuario' => $idusuario,
-        'idcct' => $idcct,
-        'fcreacion' => $fecha,
-        'atendio' => $atendio
+        'fcreacion' => $fecha
       );
 
       $this->db->insert('aplicar', $data);
