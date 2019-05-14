@@ -8,6 +8,7 @@ class Encuesta extends CI_Controller {
     $this->load->helper('appweb');
     $this->load->model('Encuesta_model');
     $this->load->model('Respuestas_model');
+    $this->load->model('Aplicar_model');
   }
 
   function get_xidusuario(){
@@ -66,26 +67,68 @@ class Encuesta extends CI_Controller {
   }// get_cuestions()
 
   public function guardar(){
-    echo "<pre>";print_r($_POST);die();
+    // echo "<pre>";print_r($_POST);die();
       $usuario = $this->session->userdata[DATOSUSUARIO];
 
       $viene = array(
-        array('tipo' => '1', 'idpregunta' => 1, 'valor' => 'algo'),
-        array('tipo' => '2', 'idpregunta' => 2, 'valor' => 'opc1, opc2, opc3')
-   );
+        'array_datos' => array(
+        array('tipo' => '1', 'idpregunta' => 1, 'valores' => 'uno', 'valores_string' => ''),
+        array('tipo' => '1', 'idpregunta' => 2, 'valores' => 'dos', 'valores_string' => ''),
+        array('tipo' => '2', 'idpregunta' => 3, 'valores_string' => 'CORDE/Supervisión/Jefatura de sector')
+        )
+      );
+      echo "<pre>";print_r($viene);die();
+      $nombre_archivo = str_replace(" ", "_", $_FILES['archivo']['name']);
 
-      $estatus_insert = $this->Respuestas_model->insert_respuestas($viene,$usuario['idusuario']);
+      $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
+      if ($id_aplica > 0) {
+        if ($nombre_archivo!='') {
+  						$ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
+  						$ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
 
-      if ($estatus_insert) {
-        redirect("encuestador", "refresh");
+  						if(!is_dir($ruta_archivos)){
+  							mkdir($ruta_archivos, 0777, true);}
+  							$_FILES['userFile']['name']     = $_FILES['archivo']['name'];
+  							$_FILES['userFile']['type']     = $_FILES['archivo']['type'];
+  							$_FILES['userFile']['tmp_name'] = $_FILES['archivo']['tmp_name'];
+  							$_FILES['userFile']['error']    = $_FILES['archivo']['error'];
+  							$_FILES['userFile']['size']     = $_FILES['archivo']['size'];
+
+  							$uploadPath              = $ruta_archivos;
+  							$config['upload_path']   = $uploadPath;
+  							$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+
+  							$this->load->library('upload', $config);
+  							$this->upload->initialize($config);
+  							if ($this->upload->do_upload('userFile')) {
+  									$fileData = $this->upload->data();
+  									$str_view = true;
+  							}
+  					}
+
+
+        $estatus_insert = $this->Respuestas_model->insert_respuestas($viene,$id_aplica,$ruta_archivos_save);
+
+        if ($estatus_insert) {
+          redirect("encuestador", "refresh");
+        }
+        else {
+          if(!$this->Aplicar_model->delete_aplica($id_aplica)){
+            echo "<pre> fallo insertar respuestas o archivo";print_r($estatus_insert);
+            die();
+          }
+          else {
+            echo "<pre> fallo borrado de idaplica";print_r($estatus_insert);
+            die();
+          }
+
+        }
       }
       else {
-        echo "<pre> fallo";print_r($estatus_insert);
+        echo "<pre> fallo idaplica";print_r($id_aplica);
         die();
       }
       // redirect("encuestador", "refresh");
-
-
   }// guardar()
 
 

@@ -68,6 +68,11 @@ class Aplicar_model extends CI_Model {
       return $id;
      }
 
+
+     function delete_aplica($id_aplica){
+      return  $this->db->delete('aplicar',array('idaplicar'=>$id_aplica));
+     }
+
      function get_pdf_encuesta($idaplicar){
            $str_query = " SELECT ap.idaplicar AS folio, ap.fcreacion AS fecha,
                                  CASE ap.atendio

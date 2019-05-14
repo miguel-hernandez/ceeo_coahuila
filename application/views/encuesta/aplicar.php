@@ -11,7 +11,11 @@
       <div id="div_contenedor_preguntas">
 
 
-      <form id='form_cuestionario_doc'>
+
+      <form action='<?= base_url('Encuesta/guardar') ?>' method='post' id='form_cuestionario_doc1'>
+
+      <!-- <form id='form_cuestionario_doc'> -->
+
 
       <?php $array_idpreguntas = array(); ?>
 

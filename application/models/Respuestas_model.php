@@ -7,34 +7,61 @@ class Respuestas_model extends CI_Model {
     }
 
 
-    function insert_respuestas($respuestas, $idusuario){
+    function insert_respuestas($respuestas, $id_aplica, $ruta_archivos_save){
       $fecha = date("Y-m-d H:i:s");
       $band= FALSE;
-
+      // echo "<pre>";print_r($respuestas['array_datos']);die();
       $this->db->trans_start();
-      $data = array(
-        'idusuario' => $idusuario,
-        'fcreacion' => $fecha
-      );
-      $this->db->insert('aplicar', $data);
-      $id_aplica = $this->db->insert_id();
+      // $data = array(
+      //   'idusuario' => $idusuario,
+      //   'fcreacion' => $fecha
+      // );
+      // $this->db->insert('aplicar', $data);
+      // $id_aplica = $this->db->insert_id();
 
       // echo "<pre>";print_r($id_aplica);die();
       if ($id_aplica > 0) {
-        foreach ($respuestas as $key => $value) {
-            $inserto = $this->insert_response($value["idpregunta"], $value["valor"], $id_aplica, $value["tipo"]);
+        if ($ruta_archivos_save!='') {
+          $inserto = $this->insert_response("NULL", $ruta_archivos_save, $id_aplica, 4);
+          if ($inserto) {
+            $band= TRUE;
+          }
+          else {
+            $this->db->trans_rollback();
+            return FALSE;
+          }
+        }
+
+        foreach ($respuestas['array_datos'] as $key => $value) {
+          if ($value["tipo"]==1) {
+            $inserto = $this->insert_response($value["idpregunta"], $value["valores"], $id_aplica, $value["tipo"]);
             if ($inserto) {
               $band= TRUE;
             }
             else {
               $this->db->trans_rollback();
-              $band= FALSE;
+              return FALSE;
             }
+          }
+          elseif ($value["tipo"]==2) {
+            $arr_opciones_resp = explode("/",$value["valores_string"]);
+            foreach ($arr_opciones_resp as $key1 => $value1) {
+              $inserto = $this->insert_response($value["idpregunta"], $value1, $id_aplica, $value["tipo"]);
+              if ($inserto) {
+                $band= TRUE;
+              }
+              else {
+                $this->db->trans_rollback();
+                return FALSE;
+              }
+            }
+          }
+
         }
       }
       if ($band==TRUE) {
-        // $this->db->trans_commit();
-        $this->db->trans_rollback();
+        $this->db->trans_commit();
+        // $this->db->trans_rollback();
         return TRUE;
       }
       else {
@@ -67,6 +94,13 @@ class Respuestas_model extends CI_Model {
             'idpregunta' => $idpregunta,
             'respuesta' => $respuesta,
             'complemento' => $value,
+            'idaplicar' => $idaplica
+          );
+          break;
+        case 4:
+          $data = array(
+            // 'idpregunta' => $idpregunta,
+            'url_comple' => $value,
             'idaplicar' => $idaplica
           );
           break;
