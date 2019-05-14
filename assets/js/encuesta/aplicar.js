@@ -265,21 +265,8 @@ $("#btn_encuesta_guardar").click(function(e){
       })
       .done(function( data ) {
         $("#wait").modal("hide");
-
-        $("#encuestador_total").empty();
-        $("#encuestador_total").append(data.total);
-
-        var arr_datos = data.result;
-        var arr_columnas = data.array_columnas;
-        obj_grid = new Grid(
-          "grid_encuestador", // el id del div HTML
-          arr_columnas, // El array de columnas, serán los encabezados
-          arr_datos // E array de los datos para llenar el grid, los índices deben corresponder a los nombres de las columnas
-        );
-        obj_grid.load();
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        // console.error("Error in read()"); console.table(e);
         $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
       });
     }
