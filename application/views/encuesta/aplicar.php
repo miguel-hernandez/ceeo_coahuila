@@ -30,7 +30,7 @@
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
                 <div class='col-xs-12'>
                   <?php if($key==0)  { ?>
-                  <input type="text" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
+                  <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
                 <?php } ?>
                 <label class='checkbox-inline'>
                   <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
@@ -59,7 +59,7 @@
       </div><!-- .row -->
 
         <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="" class="image">
-        
+
       </form>
 
 

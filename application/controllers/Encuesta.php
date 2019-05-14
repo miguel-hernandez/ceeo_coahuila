@@ -66,8 +66,8 @@ class Encuesta extends CI_Controller {
   }// get_cuestions()
 
   public function guardar(){
-    echo "<pre>";print_r($_FILES);die();
-    // echo "<pre>";print_r($_POST);die();
+    // echo "<pre>";print_r($_FILES);die();
+    echo "<pre>";print_r($_POST);die();
       $usuario = $this->session->userdata[DATOSUSUARIO];
 
       $viene = array(
