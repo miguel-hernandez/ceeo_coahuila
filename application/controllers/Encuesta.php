@@ -7,6 +7,7 @@ class Encuesta extends CI_Controller {
     parent::__construct();
     $this->load->helper('appweb');
     $this->load->model('Encuesta_model');
+    $this->load->model('Respuestas_model');
   }
 
   function get_xidusuario(){
@@ -68,19 +69,22 @@ class Encuesta extends CI_Controller {
     echo "<pre>";print_r($_FILES);die();
     // echo "<pre>";print_r($_POST);die();
       $usuario = $this->session->userdata[DATOSUSUARIO];
-      $atendio = $this->input->post('atendio');
-      $idcct = $this->input->post('idcct');
-      $idaplica = $this->Aplicar_model->insert_aplica($usuario['idusuario'], $idcct, $atendio);
 
-      foreach ($_POST as $key => $value) {
-        if($key != 'atendio' && $key != 'idcct'){
-          $porciones = explode("-", $key);
-          $idpregunta = $porciones[0];
-          $tipopregunta = $porciones[1];
-          $inserto = $this->Respuestas_model->insert_response($idpregunta, $value, $idaplica, $tipopregunta);
-        }
+      $viene = array(
+        array('tipo' => '1', 'idpregunta' => 1, 'valor' => 'algo'),
+        array('tipo' => '2', 'idpregunta' => 2, 'valor' => 'opc1, opc2, opc3')
+   );
+
+      $estatus_insert = $this->Respuestas_model->insert_respuestas($viene,$usuario['idusuario']);
+
+      if ($estatus_insert) {
+        redirect("encuestador", "refresh");
       }
-      redirect("encuestador", "refresh");
+      else {
+        echo "<pre> fallo";print_r($estatus_insert);
+        die();
+      }
+      // redirect("encuestador", "refresh");
 
 
   }// guardar()
