@@ -16,8 +16,8 @@ $(document).on('blur','.textarea_blur', function(e) {
     }
   }
 
-  console.info("array_ids_ok final textarea");
-  console.info(array_ids_ok);
+  // console.info("array_ids_ok final textarea");
+  // console.info(array_ids_ok);
 
 });
 
@@ -31,17 +31,17 @@ $(document).on('change','.checkbox_change',function(e) {
 
      let valor = $(this).val();
 
-     console.info("idpregunta: "+idpregunta);
+     // console.info("idpregunta: "+idpregunta);
 
-     console.info("array_ids");
-     console.info(array_ids);
+     // console.info("array_ids");
+     // console.info(array_ids);
 
-     console.info("array_ids_ok");
-     console.info(array_ids_ok);
+     // console.info("array_ids_ok");
+     // console.info(array_ids_ok);
 
 
      let index =  array_ids.indexOf(idpregunta);
-     console.info("index: "+index);
+     // console.info("index: "+index);
 
 
      /*
@@ -95,8 +95,8 @@ $(document).on('change','.checkbox_change',function(e) {
        }
      }
 
-     console.info("array_ids_ok final");
-     console.info(array_ids_ok);
+     // console.info("array_ids_ok final");
+     // console.info(array_ids_ok);
 });
 
 
@@ -105,8 +105,8 @@ $("#btn_encuesta_guardar").click(function(e){
   if(!Aplicar.validar()){
       Helpers.alert("Atienda los errores indicados", "error");
   }else{
-    let array_ok = Aplicar.arma_envio();
-    Aplicar.guardar(array_ok);
+
+    Aplicar.guardar();
   }
 });
 
@@ -162,56 +162,24 @@ $("#btn_encuesta_guardar").click(function(e){
         }
     },
 
-    arma_envio : (array_ok) => {
-      let arr_datos = [];
-
-      $('.requerido').each(function(i, elem){
-
-        switch (elem.type) {
-          case "textarea":
-            let arr_datos_aux = new Object();
-            // $(elem).css({'border':'1px solid rgb(169, 169, 169)'});
-            let idpregunta = $(elem).data('idpregunta');
-            let valor = $(elem).val();
-
-            arr_datos_aux["tipo"] = 1;
-            arr_datos_aux["idpregunta"] = idpregunta;
-            arr_datos_aux["valor"] = valor;
-
-            arr_datos.push(arr_datos_aux);
-          break;
-          case "checkbox":
-              let arr_datos_aux2 = new Object();
-              let idpregunta2 = $(elem).data('idpregunta');
-              let valor2 = $("input[name="+elem.name+"]:checked").val();
-              if($("input[name="+elem.name+"]:checked").val()) {
-                arr_datos_aux2["tipo"] = 2;
-                arr_datos_aux2["idpregunta"] = idpregunta2;
-                arr_datos_aux2["valor"] = valor2;
-                arr_datos.push(arr_datos_aux2);
-              }
-
-          break;
-        }
-
-      });
-      return arr_datos;
-    },
-
-    guardar : (array_ok) => {
-      console.info("Para enviar");
-      console.info(array_ids_ok);
-
+    guardar : () => {
+      // console.info("Para enviar");
+      // console.info(array_ids_ok);
       for (var i = 0; i < array_ids_ok.length; i++) {
           let valores = array_ids_ok[i]['valores'];
-          console.info("valores");
-          console.info(valores);
+          // console.info("valores");
+          // console.info(valores);
           // let valores_ok = JSON.stringify(valores);
           // array_ids_ok[i]['valores'] = valores_ok;
 
           if((array_ids_ok[i]['tipo'] == 2) || (array_ids_ok[i]['tipo'] == '2')){ // sólo checkbox
-            for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
-              
+            let string_ok = '';
+            for (var j = 0; j < valores.length; j++) {
+              // console.info("valores[j]['valor']");
+              // console.info(valores[j]['valor']);
+              let valor = valores[j]['valor'];
+              // console.info("valor: "+valor);
+              string_ok = string_ok+valor+'/';
               // array_ids_ok[i]['valores'][j] = JSON.stringify(array_ids_ok[i]['valores'][j]);
               // Object.assign({}, array_ids_ok[i]['valores'][j]);
               // $.extend({}, array_ids_ok[i]['valores']);
@@ -220,7 +188,9 @@ $("#btn_encuesta_guardar").click(function(e){
               // Object.setPrototypeOf(arr, Object.prototype); // now no longer an array, still an object
               // console.log(obj);
             }
-
+            string_ok = string_ok.substring(0, string_ok.length - 1);
+            array_ids_ok[i]['valores_string'] = string_ok;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
           }
 
           /*
@@ -232,39 +202,73 @@ $("#btn_encuesta_guardar").click(function(e){
           */
       }
 
-      console.info("MAS Para enviar");
-      console.info(array_ids_ok);
+      var file_data = $('.image').prop('files')[0];
+      if(file_data == undefined) {
+        Helpers.alert("Seleccione archivo", "error");
+      }else{
+        /*
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        console.info("form_data");
+        console.info(form_data);
+        for (var m = 0; m < array_ids_ok.length; m++) {
+          if(array_ids_ok[m]['tipo'] == 'archivo'){
+            array_ids_ok[m]['archivo'] = file_data
+          }
+        }// for
+        console.info("array_ids_ok");
+        console.info(array_ids_ok);
+        // return false;
+        */
+        Aplicar.guardar_ok(array_ids_ok);
+      }
+      return false;
 
+
+
+
+
+      // Aplicar.guardar_ok(array_ids_ok);
+      /*
+      var data=paqueteDeDatos
+      if(Object.keys(data).length === 0){
+        Helpers.alert("Seleccione archivo", "error");
+      }else{
+        Aplicar.guardar_ok(array_ids_ok, data);
+      }
+      */
+      // console.info(data_img);
+
+      // return false;
+
+
+    },
+
+    guardar_ok : (array_ids_ok) => {
+      // let array_aux = new Object();
+      // array_aux["datos"] = array_ids_ok;
+      var form_data = new FormData($("#form_cuestionario_doc")[0]);
       var ruta = base_url+"Encuesta/guardar";
       $.ajax({
-        async: true,
+        // async: true,
         url: ruta,
-        method: 'POST',
-        data: { 'array_datos': array_ids_ok },
+        type: 'POST',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        data: form_data,
         beforeSend: function( xhr ) {
           $("#wait").modal("show");
         }
       })
       .done(function( data ) {
         $("#wait").modal("hide");
-
-        $("#encuestador_total").empty();
-        $("#encuestador_total").append(data.total);
-
-        var arr_datos = data.result;
-        var arr_columnas = data.array_columnas;
-        obj_grid = new Grid(
-          "grid_encuestador", // el id del div HTML
-          arr_columnas, // El array de columnas, serán los encabezados
-          arr_datos // E array de los datos para llenar el grid, los índices deben corresponder a los nombres de las columnas
-        );
-        obj_grid.load();
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        // console.error("Error in read()"); console.table(e);
         $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
       });
     }
-
 
   };

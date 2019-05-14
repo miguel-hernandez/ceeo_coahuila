@@ -67,7 +67,9 @@ class Encuesta extends CI_Controller {
   }// get_cuestions()
 
   public function guardar(){
-    // echo "<pre>";print_r($_POST);die();
+     echo "<pre>";print_r($_POST);die();
+     echo "<pre>";print_r($_FILES);die();
+
       $usuario = $this->session->userdata[DATOSUSUARIO];
 
       $viene = array(
@@ -77,7 +79,7 @@ class Encuesta extends CI_Controller {
         array('tipo' => '2', 'idpregunta' => 3, 'valores_string' => 'CORDE/Supervisión/Jefatura de sector')
         )
       );
-      echo "<pre>";print_r($viene);die();
+      // echo "<pre>";print_r($viene);die();
       $nombre_archivo = str_replace(" ", "_", $_FILES['archivo']['name']);
 
       $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
