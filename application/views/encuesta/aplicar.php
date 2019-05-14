@@ -11,7 +11,7 @@
       <div id="div_contenedor_preguntas">
 
 
-      <form id='form_cuestionario_doc'>
+      <form id='form_cuestionario_doc' enctype="multipart/form-data">
 
       <?php $array_idpreguntas = array(); ?>
 
@@ -29,6 +29,9 @@
 
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
                 <div class='col-xs-12'>
+                  <?php if($key==0)  { ?>
+                  <input type="text" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
+                <?php } ?>
                 <label class='checkbox-inline'>
                   <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
                 </label>
@@ -55,7 +58,12 @@
 
       </div><!-- .row -->
 
+        <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="" class="image">
+        
       </form>
+
+
+
       </div><!-- div_contenedor_preguntas -->
 
     </div><!-- .panel-body -->
@@ -81,6 +89,12 @@
       array_aux["valores_string"] = '';
       array_ids_ok.push(array_aux);
     }
+
+
+    let array_aux_file = new Object();
+    array_aux_file["tipo"] = 'archivo';
+    array_aux_file["archivo"] = '';
+    array_ids_ok.push(array_aux_file);
 
   });
 </script>

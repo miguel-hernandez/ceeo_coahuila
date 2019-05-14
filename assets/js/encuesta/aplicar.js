@@ -105,8 +105,8 @@ $("#btn_encuesta_guardar").click(function(e){
   if(!Aplicar.validar()){
       Helpers.alert("Atienda los errores indicados", "error");
   }else{
-    let array_ok = Aplicar.arma_envio();
-    Aplicar.guardar(array_ok);
+
+    Aplicar.guardar();
   }
 });
 
@@ -162,47 +162,9 @@ $("#btn_encuesta_guardar").click(function(e){
         }
     },
 
-    arma_envio : (array_ok) => {
-      let arr_datos = [];
-
-      $('.requerido').each(function(i, elem){
-
-        switch (elem.type) {
-          case "textarea":
-            let arr_datos_aux = new Object();
-            // $(elem).css({'border':'1px solid rgb(169, 169, 169)'});
-            let idpregunta = $(elem).data('idpregunta');
-            let valor = $(elem).val();
-
-            arr_datos_aux["tipo"] = 1;
-            arr_datos_aux["idpregunta"] = idpregunta;
-            arr_datos_aux["valor"] = valor;
-
-            arr_datos.push(arr_datos_aux);
-          break;
-          case "checkbox":
-              let arr_datos_aux2 = new Object();
-              let idpregunta2 = $(elem).data('idpregunta');
-              let valor2 = $("input[name="+elem.name+"]:checked").val();
-              if($("input[name="+elem.name+"]:checked").val()) {
-                arr_datos_aux2["tipo"] = 2;
-                arr_datos_aux2["idpregunta"] = idpregunta2;
-                arr_datos_aux2["valor"] = valor2;
-                arr_datos.push(arr_datos_aux2);
-              }
-
-          break;
-        }
-
-      });
-      return arr_datos;
-    },
-
-    guardar : (array_ok) => {
+    guardar : () => {
       // console.info("Para enviar");
       // console.info(array_ids_ok);
-
-
       for (var i = 0; i < array_ids_ok.length; i++) {
           let valores = array_ids_ok[i]['valores'];
           // console.info("valores");
@@ -228,6 +190,7 @@ $("#btn_encuesta_guardar").click(function(e){
             }
             string_ok = string_ok.substring(0, string_ok.length - 1);
             array_ids_ok[i]['valores_string'] = string_ok;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
           }
 
           /*
@@ -238,30 +201,64 @@ $("#btn_encuesta_guardar").click(function(e){
           }
           */
       }
+
+      var file_data = $('.image').prop('files')[0];
+      if(file_data == undefined) {
+        Helpers.alert("Seleccione archivo", "error");
+      }else{
+        /*
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        console.info("form_data");
+        console.info(form_data);
+        for (var m = 0; m < array_ids_ok.length; m++) {
+          if(array_ids_ok[m]['tipo'] == 'archivo'){
+            array_ids_ok[m]['archivo'] = file_data
+          }
+        }// for
+        console.info("array_ids_ok");
+        console.info(array_ids_ok);
+        // return false;
+        */
+        Aplicar.guardar_ok(array_ids_ok);
+      }
+      return false;
+
+
+
+
+
+      // Aplicar.guardar_ok(array_ids_ok);
       /*
-      var obj = {};
-      const arrayToObject = (array_ids_ok, keyField) =>
-         array.reduce((obj, item) => {
-           obj[item[keyField]] = item
-           // return obj
-         }, {})
-
-      console.info("obj");
-      console.info(obj);
-
+      var data=paqueteDeDatos
+      if(Object.keys(data).length === 0){
+        Helpers.alert("Seleccione archivo", "error");
+      }else{
+        Aplicar.guardar_ok(array_ids_ok, data);
+      }
+      */
+      // console.info(data_img);
 
       // return false;
-      array_ids_ok = JSON.stringify(array_ids_ok);
-      */
-      // console.info("MAS Para enviar");
-      // console.info(array_ids_ok);
 
+
+    },
+
+    guardar_ok : (array_ids_ok) => {
+      // let array_aux = new Object();
+      // array_aux["datos"] = array_ids_ok;
+      var form_data = new FormData($("#form_cuestionario_doc")[0]);
       var ruta = base_url+"Encuesta/guardar";
       $.ajax({
-        async: true,
+        // async: true,
         url: ruta,
-        method: 'POST',
-        data: { 'array_datos': array_ids_ok },
+        type: 'POST',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        data: form_data,
         beforeSend: function( xhr ) {
           $("#wait").modal("show");
         }
@@ -286,6 +283,5 @@ $("#btn_encuesta_guardar").click(function(e){
         $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
       });
     }
-
 
   };
