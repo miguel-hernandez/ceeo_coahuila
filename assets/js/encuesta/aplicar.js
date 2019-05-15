@@ -49,6 +49,15 @@ $(document).on('change','.checkbox_change',function(e) {
      console.info("index_ok: "+index_ok);
      */
 
+      // var arr = $("[name="+idpregunta+"]").map(function(){
+      //    return $(this).val();
+      //  }).get();
+      //  console.log(arr.length);
+      //  if (arr.length == 2) {
+      //
+      //  }
+       // let valor = arr.join('/');
+
      if($(this).is(":checked")) {
         /*
         let valor = $(this).val();

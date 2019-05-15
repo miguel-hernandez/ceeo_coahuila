@@ -98,3 +98,4 @@ define('ERRORMESSAGE', '2');
 
 define('PREGUNTA_ABIERTA', 1);
 define('PREGUNTA_OPCIONMULTIPLE', 2);
+define('PREGUNTA_UNAOPCION', 3);
