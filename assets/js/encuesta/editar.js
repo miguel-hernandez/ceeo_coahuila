@@ -177,6 +177,7 @@ $("#btn_encuesta_editar").click(function(e){
       let array_preguntas = [];
       $('.requerido').each(function(r, elem){
         // console.log(r);
+        let idpregunta = $(elem).data('idpregunta');
           switch (elem.type) {
             case "textarea":
             if($(elem).val() == ''){
@@ -185,7 +186,7 @@ $("#btn_encuesta_editar").click(function(e){
             }
             break;
             case "checkbox":
-              let idpregunta = $(elem).data('idpregunta');
+              // let idpregunta = $(elem).data('idpregunta');
 
                 if(array_preguntas.includes(idpregunta)){
                   // console.log("if includes");
@@ -220,6 +221,44 @@ $("#btn_encuesta_editar").click(function(e){
 
                   }
                 }
+
+            break;
+            case "radio":
+            // let idpregunta = $(elem).data('idpregunta');
+
+              if(array_preguntas.includes(idpregunta)){
+                // console.log("if includes");
+              }else{
+                array_preguntas.push(idpregunta);
+                // console.log(elem.name);
+
+                if(!$("input[name="+elem.name+"]:checked").val()) {
+                    $('#label_'+elem.name).html('seleccione <br />');
+                    error++;
+                }
+                else {
+                  if ($("input[name="+elem.name+"]:checked").val()) {
+                    // let valor = $("input[name="+elem.name+"]").val();
+                    var arr = $("[name="+elem.name+"]:checked").map(function(){
+                        return this.value;
+                      }).get();
+                      let valor = arr.join('/');
+                    // console.log(str);
+                    let array_aux = [];
+                        for (var i = 0; i < array_ids_ok.length; i++) {
+                          if(array_ids_ok[i]['idpregunta'] == idpregunta){
+                            array_aux['idpregunta'] = idpregunta;
+                            array_aux['valor'] = valor;
+                            array_ids_ok[i]['valores'].push(array_aux);
+                          }
+                        }
+                  }
+
+                      // console.log(idpregunta);
+                      // console.log(array_ids_ok);
+
+                }
+              }
 
             break;
           }

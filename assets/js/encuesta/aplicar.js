@@ -138,7 +138,7 @@ $("#btn_encuesta_guardar").click(function(e){
       let arr_respuestas = [];
       let array_preguntas = [];
       $('.requerido').each(function(i, elem){
-
+        let idpregunta = $(elem).data('idpregunta');
           switch (elem.type) {
             case "textarea":
             if($(elem).val() == ''){
@@ -147,7 +147,22 @@ $("#btn_encuesta_guardar").click(function(e){
             }
             break;
             case "checkbox":
-              let idpregunta = $(elem).data('idpregunta');
+              // let idpregunta = $(elem).data('idpregunta');
+
+                if(array_preguntas.includes(idpregunta)){
+                  // console.log("if includes");
+                }else{
+                  array_preguntas.push(idpregunta);
+                  // console.log("else includes");
+                  if(!$("input[name="+elem.name+"]:checked").val()) {
+                      $('#label_'+elem.name).html('seleccione <br />');
+                      error++;
+                  }
+                }
+
+            break;
+            case "radio":
+              // let idpregunta = $(elem).data('idpregunta');
 
                 if(array_preguntas.includes(idpregunta)){
                   // console.log("if includes");
