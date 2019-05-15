@@ -63,7 +63,7 @@ class Login extends CI_Controller {
 				redirect('Adminsitrador', 'refresh');
 			break;
 			case U_ENCUESTADOR:
-				redirect('Encuestador', 'refresh');
+				redirect('encuestador', 'refresh');
 			break;
 
 

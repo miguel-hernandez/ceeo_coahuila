@@ -268,5 +268,84 @@ class Encuesta extends CI_Controller {
     }
   }// editar_insert()
 
+  public function mostrar($idaplicar){
+    if(verifica_sesion_redirige($this)){
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $tipo = $usuario["tipo"];
+      $data["titulo"] = "";
+      $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+
+      // $idaplicar = $this->input->post('idaplicar');
+      // echo $idaplicar; die();
+
+      $array_preguntas = $this->Encuesta_model->get_cuestions_mostrar();
+      $array_preguntas_ok = array();
+      foreach ($array_preguntas as $key => $pregunta) {
+        $pregunta['array_complemento'] = $this->Encuesta_model->get_complemento_xidpregunta_mostrar($pregunta['idpregunta']);
+        $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario($idaplicar, $pregunta['idpregunta']);
+        array_push($array_preguntas_ok, $pregunta);
+      }
+
+      // echo "<pre>"; print_r($array_preguntas_ok); die();
+      $array_final = array();
+
+      foreach ($array_preguntas_ok as $key => $pregunta_ok) {
+        $array_final_aux['idpregunta'] = $pregunta_ok['idpregunta'];
+        $array_final_aux['pregunta'] = $pregunta_ok['pregunta'];
+        $array_final_aux['idtipopregunta'] = $pregunta_ok['idtipopregunta'];
+        $array_final_aux['npregunta'] = $pregunta_ok['npregunta'];
+        // $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];
+        $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];
+
+        if($pregunta_ok['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){
+          // $array_opciones = $pregunta_ok['array_complemento'];
+          $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
+        }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_ABIERTA) {
+          $array_final_aux['respuesta'] = $pregunta_ok['array_contesto'][0]['respuesta'];
+        }
+        array_push($array_final, $array_final_aux);
+      }
+
+      $data['array_datos'] = $array_final;
+      $array_file = $this->Encuesta_model->get_file_path($idaplicar);
+      $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';
+      // echo "<pre>"; print_r($data); die();
+      pagina_basica($this, "encuesta/mostrar", $data);
+    }// verifica_sesion_redirige()
+  }// mostrar()
+
+  private function verifica_sicontesto($array_opciones, $array_opciones_contesto){
+    $array_complementos_contesto = array();
+
+    foreach ($array_opciones_contesto as $key => $opcion_contesto) {
+      array_push($array_complementos_contesto, $opcion_contesto['complemento']);
+    }
+
+    $array_final = array();
+    foreach ($array_opciones as $key => $opcion_catalogo) {
+      $array_aux = array();
+      $array_aux['idpregunta'] = $opcion_catalogo['idpregunta'];
+      $array_aux['complemento'] = $opcion_catalogo['complemento'];
+      $array_aux['orden'] = $opcion_catalogo['orden'];
+      $array_aux['checked'] = '';
+
+      if (in_array($opcion_catalogo['complemento'], $array_complementos_contesto)) {
+          $array_aux['checked'] = 'checked';
+      }
+      array_push($array_final, $array_aux);
+    }
+    return $array_final;
+  }// verifica_sicontesto()
+
+  public function eliminar(){
+      $idaplicar = $this->input->post('idaplicar');
+      $result = $this->Encuesta_model->eliminar($idaplicar);
+      // echo $idaplicar; die();
+      $response = array(
+        "result" => $result
+      );
+
+      envia_datos_json(200, $response, $this);
+  }// mostrar()
 
 }// class

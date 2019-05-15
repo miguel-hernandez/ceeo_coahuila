@@ -1,20 +1,49 @@
 /* jshint esversion: 6 */
-
 $(function() {
   Encuesta.listar();
 });
 
-
-
-$("#modal_encuestador_btn_cerrar").click(function(e){
+$("#btn_mostrar_encuesta").click(function(e){
   e.preventDefault();
-  $("#radio_director_visitador").prop('checked', false);
-  $("#radio_docente_visitador").prop('checked', false);
-  $("#div_contenedor_preguntas").empty();
-  $("#modal_visitador").modal("hide");
-  obj_visitador.read();
+  let arr_row = obj_grid.get_row_selected();
+  if(arr_row.length==0 || arr_row[0]['id'] == undefined){
+    Helpers.alert("Seleccione un registro", "error");
+  }else{
+    let idaplicar = arr_row[0]['id'];
+    Encuesta.mostrar(idaplicar);
+  }
 });
 
+$("#btn_eliminar_encuesta").click(function(e){
+  e.preventDefault();
+  let arr_row = obj_grid.get_row_selected();
+  if(arr_row.length==0 || arr_row[0]['id'] == undefined){
+    Helpers.alert("Seleccione un registro", "error");
+  }else{
+    let idaplicar = arr_row[0]['id'];
+    bootbox.confirm({
+        message: "<b>¿Está seguro de querer eliminar la encuesta seleccionada?</b>",
+        size: 'small',
+        buttons: {
+            confirm: {
+                label: 'Si',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'No',
+                className: 'btn-default'
+            }
+        },
+        callback: function (result) {
+          if(result){
+            Encuesta.eliminar(idaplicar);
+          }else{
+            // Helpers.alert("nada...");
+          }
+        }
+    });
+  }
+});
 
 
 let Encuesta = {
@@ -49,8 +78,50 @@ let Encuesta = {
       // console.error("Error in read()"); console.table(e);
       $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
     });
-  }
+  },
 
+  mostrar : (idaplicar) => {
+    let form = document.createElement("form");
+    /* let element1 = document.createElement("input"); */
+    form.name="form_mostrar";
+    form.method = "POST";
+    form.target = "_parent";
+    /*
+    element1.type="hidden";
+    element1.value = idaplicar;
+    element1.name="idaplicar";
+    form.appendChild(element1);
+    */
+    form.action = base_url+"encuesta/"+idaplicar;
+    document.body.appendChild(form);
+    form.submit();
+  },
+
+  eliminar : (idaplicar) => {
+    var ruta = base_url+"Encuesta/eliminar";
+    $.ajax({
+      async: true,
+      url: ruta,
+      method: 'POST',
+      data: { 'idaplicar':idaplicar },
+      beforeSend: function( xhr ) {
+        $("#wait").modal("show");
+      }
+    })
+    .done(function( data ) {
+      $("#wait").modal("hide");
+      if(data.result){
+        Helpers.alert("Registro eliminado correctamente", "success");
+        Encuesta.listar();
+      }else{
+      Helpers.alert("Ocurrió un error, reintente por favor.", "error");
+      }
+
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+    });
+  }
 
 };
 
