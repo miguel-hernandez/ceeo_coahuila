@@ -1,7 +1,7 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading bg-color-1 text-center">
-      <h3 class="panel-title">Mostrar encuesta</h3>
+      <h3 class="panel-title">Mostrar requerimiento</h3>
     </div><!-- .panel-heading -->
     <div class="panel-body">
 
