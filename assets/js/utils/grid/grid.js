@@ -45,16 +45,27 @@ function Grid(iddiv,columnas,arr_datos){
         html += "<tr>";
         if (objeto_columnas.hasOwnProperty(item)) {
           for (var item in objeto_columnas) {
-            if(objeto_columnas[item]["type"]=="hidden"){
-              html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"' hidden>";
-              html += that_grid.arr_datos[i][item];
-              html += "</td>";
+            switch (objeto_columnas[item]["type"]) {
+              case "button":
+                  html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"'>";
+                  html += "<button id='btn_mostrar_encuesta' onclick='ver_ev("+that_grid.arr_datos[i][item]+")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-eye'></i>";
+                  html += "</button>";
+                  html += "</td>";
+                break;
+              case "hidden":
+                  html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"' hidden>";
+                  html += that_grid.arr_datos[i][item];
+                  html += "</td>";
+                break;
+              case "text":
+                  html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"'>";
+                  html += that_grid.arr_datos[i][item];
+                  html += "</td>";
+                break;
+              default:
+
             }
-            else{
-              html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"'>";
-              html += that_grid.arr_datos[i][item];
-              html += "</td>";
-            }
+
           }// end for columns
         }
         html += "</tr>";

@@ -70,8 +70,7 @@
 
       </div><!-- .row -->
 
-        <!-- <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" class="image"> -->
-        <img class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" >
+        <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" ></iframe>
         <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image">
 
 

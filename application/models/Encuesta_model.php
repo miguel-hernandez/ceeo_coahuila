@@ -8,10 +8,19 @@ class Encuesta_model extends CI_Model {
 
 
   function get_xidusuario($idvisitador){
-    $str_query = " SELECT ap.idaplicar AS id, fcreacion
-    FROM aplicar ap
-    WHERE ap.idusuario = {$idvisitador}
+    // $str_query = " SELECT ap.idaplicar AS id, fcreacion
+    // FROM aplicar ap
+    // WHERE ap.idusuario = {$idvisitador}
+    // ";
+    $str_query = " SELECT
+      ap.idaplicar AS id, fcreacion,
+      r.respuesta as n_documento,
+      r.idaplicar as a_adjunto
+      FROM aplicar ap
+      LEFT JOIN respuesta r ON ap.idaplicar=r.idaplicar
+      WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=1
     ";
+
     // echo $str_query; die();
     return $this->db->query($str_query)->result_array();
   }// get_asignadas()
@@ -103,6 +112,16 @@ class Encuesta_model extends CI_Model {
     else{
       return TRUE;
     }
+  }// eliminar()
+
+
+  function get_url_evidencia($idaplicar){
+    $str_query = " SELECT res.url_comple as url_comple
+    FROM respuesta res
+    WHERE res.idaplicar = {$idaplicar} AND res.idpregunta IS NULL
+    ";
+    // echo $str_query; die();
+    return $this->db->query($str_query)->row('url_comple');
   }// eliminar()
 
 
