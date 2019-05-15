@@ -23,18 +23,18 @@ class Encuesta_model extends CI_Model {
 
   function get_complemento_xidpregunta($idpregunta){
     $query = " SELECT *
-               FROM pregunta_complemento
-               WHERE idpregunta = {$idpregunta}
-               ORDER BY orden ASC ";
+    FROM pregunta_complemento
+    WHERE idpregunta = {$idpregunta}
+    ORDER BY orden ASC ";
     return $this->db->query($query)->result_array();
   }
 
   function get_complemento_xidpregunta_resp($idpregunta){
     $query = " SELECT *
-               FROM pregunta_complemento
-               WHERE idpregunta = {$idpregunta}
-               ORDER BY orden ASC ";
-               // echo "<pre>";print_r($query);die();
+    FROM pregunta_complemento
+    WHERE idpregunta = {$idpregunta}
+    ORDER BY orden ASC ";
+    // echo "<pre>";print_r($query);die();
     return $this->db->query($query)->result_array();
   }
 
@@ -45,6 +45,66 @@ class Encuesta_model extends CI_Model {
     WHERE r.idaplicar = {$idaplicar} and p.idencuesta = {$tipo}";
     // echo $query; die();
     return $this->db->query($query)->result_array();
+  }// get_cuestions_edita()
+
+  function get_cuestions_mostrar(){
+    $query = "SELECT *,  '' AS respuesta, '' AS array_complemento, '' AS array_contesto, '' AS array_final
+    FROM pregunta
+    WHERE idencuesta = 1";//limit 3
+    return $this->db->query($query)->result_array();
   }
+
+  function get_complemento_xidpregunta_mostrar($idpregunta){
+    $query = " SELECT *, '' AS checked
+    FROM pregunta_complemento
+    WHERE idpregunta = {$idpregunta}
+    ORDER BY orden ASC ";
+    return $this->db->query($query)->result_array();
+  }
+
+  function get_encuestaxidusuario($idaplicar, $idpregunta){
+    $str_query = " SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta
+    FROM respuesta res
+    WHERE res.idaplicar = ? AND res.idpregunta = ?
+    ";
+    // echo $str_query; die();
+    return $this->db->query($str_query, array($idaplicar, $idpregunta))->result_array();
+  }// get_encuestaxidusuario()
+
+  function get_file_path($idaplicar){
+    $str_query = " SELECT res.url_comple
+    FROM respuesta res
+    WHERE res.idaplicar = ? AND res.idpregunta IS NULL
+    ";
+    // echo $str_query; die();
+    return $this->db->query($str_query, array($idaplicar))->result_array();
+  }// get_file_path()
+
+  function eliminar($idaplicar){
+    $this->db->trans_start();
+
+    $str_query_1 = " DELETE
+    FROM respuesta
+    WHERE idaplicar = ?
+    ";
+    $this->db->query($str_query_1, array($idaplicar));
+
+    $str_query_2 = " DELETE
+    FROM aplicar
+    WHERE idaplicar = ?
+    ";
+    $this->db->query($str_query_2, array($idaplicar));
+
+    $this->db->trans_complete();
+
+    if ($this->db->trans_status() === FALSE){
+      return FALSE;
+    }
+    else{
+      return TRUE;
+    }
+  }// eliminar()
+
+
 
 }
