@@ -22,7 +22,7 @@ $("#btn_eliminar_encuesta").click(function(e){
   }else{
     let idaplicar = arr_row[0]['id'];
     bootbox.confirm({
-        message: "<b>¿Está seguro de querer eliminar la encuesta seleccionada?</b>",
+        message: "<b>¿Está seguro de querer eliminar el requerimiento seleccionado?</b>",
         size: 'small',
         buttons: {
             confirm: {
