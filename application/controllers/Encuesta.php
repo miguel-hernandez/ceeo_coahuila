@@ -133,16 +133,16 @@ class Encuesta extends CI_Controller {
                 }
             }
         if ($estatus_arch) {
-          $data = array('estatus' => $estatus_arch, 'respuesta' => "La encuesta se guardo correctamente.");
+          $data = array('estatus' => $estatus_arch, 'respuesta' => "La encuesta se guardó correctamente.");
           envia_datos_json(200,$data, $this);
         }
         else {
-            $data = array('estatus' => $estatus_arch, 'respuesta' => "Fallo al insertar archivo");
+            $data = array('estatus' => $estatus_arch, 'respuesta' => "Falló al insertar archivo.");
             envia_datos_json(200,$data, $this );
         }
       }
       else {
-        $data = array('estatus' => $id_aplica, 'respuesta' => "Fallo al insertar idaplica");
+        $data = array('estatus' => $id_aplica, 'respuesta' => "Falló al insertar idaplica.");
         envia_datos_json(200,$data, $this );
       }
     }
