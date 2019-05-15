@@ -145,4 +145,26 @@ class Respuestas_model extends CI_Model {
       $this->db->where($where);
       return $this->db->update('respuesta', $data);
     }
+
+    function get_response($idaplica){
+      $str_query = " SELECT
+                  r.idrespuesta, r.idaplicar, r.idpregunta, p.idtipopregunta, r.respuesta, r.complemento, r.url_comple
+                  FROM respuesta as r
+                  LEFT JOIN pregunta p ON r.idpregunta= p.idpregunta
+                  WHERE r.idaplicar={$idaplica}
+      ";
+                    // echo $str_query ; die();
+       return $this->db->query($str_query)->result_array();
+    }
+
+    function get_response_xidpregunta($idpregunta, $idaplica){
+      $str_query = " SELECT
+                  r.idrespuesta, r.idaplicar, r.idpregunta, p.idtipopregunta, r.respuesta, r.complemento, r.url_comple
+                  FROM respuesta as r
+                  LEFT JOIN pregunta p ON r.idpregunta= p.idpregunta
+                  WHERE r.idaplicar={$idaplica} AND p.idpregunta={$idpregunta}
+      ";
+                    // echo $str_query ; die();
+       return $this->db->query($str_query)->result_array();
+    }
 }

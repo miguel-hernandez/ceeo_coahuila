@@ -5,6 +5,7 @@ $(function() {
 });
 
 
+
 $("#modal_encuestador_btn_cerrar").click(function(e){
   e.preventDefault();
   $("#radio_director_visitador").prop('checked', false);
@@ -52,3 +53,34 @@ let Encuesta = {
 
 
 };
+
+
+$("#btn_editar_respuestas").click(function(e){
+  e.preventDefault();
+  $row_g = obj_grid.get_row_selected();
+  // console.log($row_g[0]['id']);
+  // window.location.href = base_url+"Encuesta/editar";
+
+  var ruta = base_url+"Encuesta/editar";
+  $.ajax({
+    async: true,
+    url: ruta,
+    method: 'POST',
+    data: {"id_aplicar":$row_g[0]['id']},
+    beforeSend: function( xhr ) {
+      $("#wait").modal("show");
+    }
+  })
+  .done(function( data ) {
+    $("#wait").modal("hide");
+    // location.href = base_url+"Encuesta/editar";
+    $(".container").empty();
+    $(".container").append(data.str_view_edit);
+
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    // console.error("Error in read()"); console.table(e);
+    $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+  });
+
+});
