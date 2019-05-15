@@ -40,6 +40,21 @@
               <?php } ?>
             <?php } ?>
 
+            <?php if($pregunta['idtipopregunta'] == PREGUNTA_UNAOPCION){ ?>
+
+              <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
+                <div class='col-xs-12'>
+                  <?php if($key==0)  { ?>
+                  <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
+                <?php } ?>
+                <label class='checkbox-inline'>
+                  <input class='requerido checkbox_change' type='radio' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'> <?= $complemento['complemento'] ?>
+                </label>
+                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
+                </div>
+              <?php } ?>
+            <?php } ?>
+
         </div><!-- .row -->
         <br>
       <?php } ?>
