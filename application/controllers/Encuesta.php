@@ -169,7 +169,7 @@ class Encuesta extends CI_Controller {
                 }
             }
         if ($estatus_arch) {
-          $data = array('estatus' => $estatus_arch, 'respuesta' => "La encuesta se guardó correctamente.");
+          $data = array('estatus' => $estatus_arch, 'respuesta' => "El requerimiento se guardó correctamente.");
           envia_datos_json(200,$data, $this);
         }
         else {
@@ -261,7 +261,7 @@ class Encuesta extends CI_Controller {
                 }
             }
         if ($estatus_arch) {
-          $data = array('estatus' => $estatus_arch, 'respuesta' => "La encuesta se guardó correctamente.");
+          $data = array('estatus' => $estatus_arch, 'respuesta' => "El requerimiento se editó correctamente.");
           envia_datos_json(200,$data, $this);
         }
         else {
