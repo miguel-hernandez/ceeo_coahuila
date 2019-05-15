@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
           <label>Total: </label> <span id="encuestador_total"></span>
         </div>
 
@@ -15,6 +15,12 @@
         <a href="<?= base_url('Encuesta/aplicar') ?>" type="button" class="btn btn-primary btn-block">
           <i class="fa fa-pencil"></i>
           Registrar
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+        <button id="btn_editar_respuestas" type="button" class="btn btn-primary btn-block">
+          <i class="fa fa-pencil-square-o"></i>
+          Editar
         </a>
       </div>
 

@@ -29,6 +29,16 @@ class Encuesta_model extends CI_Model {
     return $this->db->query($query)->result_array();
   }
 
+  function get_complemento_xidpregunta_resp($idpregunta){
+    $query = " SELECT *
+               FROM pregunta_complemento
+               WHERE idpregunta = {$idpregunta}
+               ORDER BY orden ASC ";
+               // echo "<pre>";print_r($query);die();
+    return $this->db->query($query)->result_array();
+  }
+
+
   function get_cuestions_edita($tipo, $idaplicar){
     $query = " SELECT * FROM pregunta p
     INNER JOIN respuesta r ON r.idpregunta = p.idpregunta
