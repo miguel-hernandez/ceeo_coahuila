@@ -8,7 +8,7 @@
       <?php foreach ($array_datos as $key => $dato) { ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
-              <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label>
+              <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
             </div>
             <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <div class='col-xs-12'>
