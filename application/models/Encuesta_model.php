@@ -27,7 +27,7 @@ class Encuesta_model extends CI_Model {
   }// get_asignadas()
 
   function get_cuestions(){
-    $query = "SELECT *, '' AS array_complemento FROM pregunta WHERE idencuesta = 1 ";//limit 3
+    $query = "SELECT *, '' AS array_complemento FROM pregunta WHERE idencuesta = 1 ORDER BY npregunta";//limit 3
     return $this->db->query($query)->result_array();
   }
 
@@ -60,7 +60,8 @@ class Encuesta_model extends CI_Model {
   function get_cuestions_mostrar(){
     $query = "SELECT *,  '' AS respuesta, '' AS array_complemento, '' AS array_contesto, '' AS array_final
     FROM pregunta
-    WHERE idencuesta = 1";//limit 3
+    WHERE idencuesta = 1
+    ORDER BY npregunta";//limit 3
     return $this->db->query($query)->result_array();
   }
 
