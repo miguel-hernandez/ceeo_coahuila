@@ -20,7 +20,7 @@ class Encuesta extends CI_Controller {
       // $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
       $arr_columnas = array(
         "id"=>array("type"=>"text", "header"=>"Folio"),
-        "fcreacion"=>array("type"=>"text", "header"=>"Fecha de aplicación"),
+        "fcreacion"=>array("type"=>"hidden", "header"=>"Fecha de aplicación"),
         "n_documento"=>array("type"=>"text", "header"=>"Nombre del documento"),
         "a_adjunto"=>array("type"=>"button", "header"=>"Evidencia")
       );
@@ -229,6 +229,12 @@ class Encuesta extends CI_Controller {
 
       if ($id_aplica > 0) {
         if ($nombre_archivo!='') {
+
+          $files = glob("evidencias/{$usuario['idusuario']}/{$id_aplica}/*"); //obtenemos todos los nombres de los ficheros
+          foreach($files as $file){
+            if(is_file($file))
+            unlink($file); //elimino el fichero
+            }
               $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
               // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
 
