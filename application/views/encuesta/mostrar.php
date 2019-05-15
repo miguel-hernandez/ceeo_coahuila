@@ -12,7 +12,7 @@
             </div>
             <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <div class='col-xs-12'>
-                <textarea class='form-control' rows='2' readonly><?= $dato['respuesta'] ?></textarea>
+                <textarea class='form-control' rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
               </div><!-- .col-xs-12 -->
             <?php } ?>
             <?php if($dato['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>

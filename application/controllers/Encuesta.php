@@ -309,7 +309,7 @@ class Encuesta extends CI_Controller {
           // $array_opciones = $pregunta_ok['array_complemento'];
           $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
         }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_ABIERTA) {
-          $array_final_aux['respuesta'] = $pregunta_ok['array_contesto'][0]['respuesta'];
+          $array_final_aux['respuesta'] = (isset($pregunta_ok['array_contesto'][0]['respuesta']))?$pregunta_ok['array_contesto'][0]['respuesta']:'';
         }
         array_push($array_final, $array_final_aux);
       }
