@@ -182,5 +182,91 @@ class Encuesta extends CI_Controller {
     }
   }// guardar()
 
+  public function editar_insert(){
+     // echo "<pre>";print_r($_POST);die();
+     // $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
+     // echo "<pre>";print_r($_FILES);die();
+     if(verifica_sesion_redirige($this)){
+      $band = TRUE;
+      $estatus_arch = TRUE;
+      $usuario = $this->session->userdata[DATOSUSUARIO];
+      $array_respuestas = array('array_datos' => array());
+      foreach ($_POST as $key => $value) {
+        if (is_int($key)) {
+          if ($band==TRUE) {
+            array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
+          }
+          else {
+            $band=TRUE;
+          }
+        }
+        else {
+          if ($key=='id_aplicar') {
+            $id_aplica =$value;
+          }
+          else {
+            if ($band==TRUE) {
+              $arr_cand =explode('_', $key);
+              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+              $band=FALSE;
+            }
+            else {
+              $band=TRUE;
+            }
+          }
+
+        }
+      }
+      // echo "<pre>";print_r($id_aplica);die();
+
+      $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
+
+      // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
+      // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
+      $respuesta_estatus = $this->Respuestas_model->update_respuestas($array_respuestas,$nombre_archivo,$id_aplica,$usuario['idusuario']);
+
+      if ($id_aplica > 0) {
+        if ($nombre_archivo!='') {
+              $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
+              // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
+
+              if(!is_dir($ruta_archivos)){
+                mkdir($ruta_archivos, 0777, true);}
+                $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
+                $_FILES['userFile']['type']     = $_FILES['ifile_aplicar']['type'];
+                $_FILES['userFile']['tmp_name'] = $_FILES['ifile_aplicar']['tmp_name'];
+                $_FILES['userFile']['error']    = $_FILES['ifile_aplicar']['error'];
+                $_FILES['userFile']['size']     = $_FILES['ifile_aplicar']['size'];
+
+                $uploadPath              = $ruta_archivos;
+                $config['upload_path']   = $uploadPath;
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('userFile')) {
+                    $fileData = $this->upload->data();
+                    $estatus_arch = TRUE;
+                }
+                else {
+                  $estatus_arch = FALSE;
+                }
+            }
+        if ($estatus_arch) {
+          $data = array('estatus' => $estatus_arch, 'respuesta' => "La encuesta se guardó correctamente.");
+          envia_datos_json(200,$data, $this);
+        }
+        else {
+            $data = array('estatus' => $estatus_arch, 'respuesta' => "Falló al insertar archivo.");
+            envia_datos_json(200,$data, $this );
+        }
+      }
+      else {
+        $data = array('estatus' => $id_aplica, 'respuesta' => "Falló al insertar idaplica.");
+        envia_datos_json(200,$data, $this );
+      }
+    }
+  }// editar_insert()
+
 
 }// class

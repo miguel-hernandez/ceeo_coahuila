@@ -58,9 +58,9 @@ let Encuesta = {
 $("#btn_editar_respuestas").click(function(e){
   e.preventDefault();
   $row_g = obj_grid.get_row_selected();
-  // console.log($row_g[0]['id']);
+  // console.log($row_g['length']);
   // window.location.href = base_url+"Encuesta/editar";
-
+if ($row_g['length']!=0) {
   var ruta = base_url+"Encuesta/editar";
   $.ajax({
     async: true,
@@ -82,5 +82,10 @@ $("#btn_editar_respuestas").click(function(e){
     // console.error("Error in read()"); console.table(e);
     $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
   });
+}
+else {
+  Helpers.alert("Seleccione una encuesta a editar.", "error");
+}
+
 
 });

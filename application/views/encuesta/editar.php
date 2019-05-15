@@ -24,7 +24,7 @@
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?=$array_respuetas[$pregunta['idpregunta']]['respuesta']?></textarea>
+                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
               </div>
             <?php } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
@@ -34,23 +34,20 @@
                   <?php if($key==0)  { ?>
                   <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
                 <?php } ?>
-                <?php foreach ($array_respuetas as $keyr => $valuer): ?>
-                  <?php if ($valuer['idpregunta']==$pregunta['idpregunta'] ){ ?>
-                    <?php if ($valuer['complemento']==$complemento['complemento']){ ?>
                       <label class='checkbox-inline'>
-                        <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>' <?=($valuer['complemento']==$complemento['complemento'])?"checked":'' ?>> <?= $complemento['complemento'] ?>
+                        <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'
+                        <?php foreach ($array_respuetas as $keyr => $valuer): ?>
+                          <?php if ($valuer['idpregunta']==$pregunta['idpregunta'] ){ ?>
+                            <?php if ($valuer['complemento']==$complemento['complemento']){ ?>
+                               <?="checked"?>
+                               <?php }else {?>
+                                 <?=""?>
+                               <?php }
+                             }?>
+                        <?php endforeach; ?>
+                        > <?= $complemento['complemento'] ?>
                       </label>
                       <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
-                    <?php }else {?>
-                      <label class='checkbox-inline'>
-                        <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>' > <?= $complemento['complemento'] ?>
-                      </label>
-                      <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
-                  <?php }
-                  }?>
-                  <?php endforeach; ?>
-
-
                 </div>
               <?php } ?>
             <?php } ?>
@@ -73,7 +70,10 @@
 
       </div><!-- .row -->
 
-        <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="" class="image">
+        <!-- <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" class="image"> -->
+        <img class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" >
+        <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image">
+
 
       </form>
 
@@ -88,6 +88,7 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
+
     let str = $("#itxt_idpreguntas").val();
     array_ids = str.split(",");
     array_ids_ok = [];
@@ -105,7 +106,6 @@
       array_ids_ok.push(array_aux);
     }
 
-
     let array_aux_file = new Object();
     array_aux_file["tipo"] = 'archivo';
     array_aux_file["archivo"] = '';
@@ -114,4 +114,4 @@
   });
 </script>
 
-<script src="<?= base_url('assets/js/encuesta/aplicar.js') ?>"></script>
+<script src="<?= base_url('assets/js/encuesta/editar.js') ?>"></script>

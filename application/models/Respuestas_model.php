@@ -167,4 +167,90 @@ class Respuestas_model extends CI_Model {
                     // echo $str_query ; die();
        return $this->db->query($str_query)->result_array();
     }
+
+
+    function update_respuestas($respuestas, $nombre_archivo, $id_aplica,$idusuario){
+      $fecha = date("Y-m-d H:i:s");
+      $band= FALSE;
+      // echo "<pre>";print_r($respuestas['array_datos']);die();
+      $this->db->trans_start();
+
+
+      // echo "<pre>";print_r($id_aplica);die();
+      if ($id_aplica > 0) {
+        if ($nombre_archivo!='') {
+          $str_query = " DELETE FROM respuesta
+            WHERE idaplicar = {$id_aplica}
+          ";
+           $estatus_elim = $this->db->query($str_query);
+           if ($estatus_elim) {
+             $ruta_archivos_save = "evidencias/{$idusuario}/{$id_aplica}/$nombre_archivo";
+             $inserto = $this->insert_response("NULL", $ruta_archivos_save, $id_aplica, 4);
+             if ($inserto) {
+               $band= TRUE;
+             }
+             else {
+               $this->db->trans_rollback();
+               return FALSE;
+             }
+           }
+           else {
+             $this->db->trans_rollback();
+             return FALSE;
+           }
+
+
+        }
+        else {
+          $str_query = " DELETE FROM respuesta
+            WHERE idaplicar = {$id_aplica} AND !ISNULL(idpregunta)
+          ";
+           $estatus_elim = $this->db->query($str_query);
+           if ($estatus_elim) {
+             $band= TRUE;
+           }
+           else {
+             $this->db->trans_rollback();
+             return FALSE;
+           }
+        }
+
+        foreach ($respuestas['array_datos'] as $key => $value) {
+          if ($value["tipo"]==1) {
+            $inserto = $this->insert_response($value["idpregunta"], $value["valores"], $id_aplica, $value["tipo"]);
+            if ($inserto) {
+              $band= TRUE;
+            }
+            else {
+              $this->db->trans_rollback();
+              return FALSE;
+            }
+          }
+          elseif ($value["tipo"]==2) {
+            $arr_opciones_resp = explode("/",$value["valores_string"]);
+            foreach ($arr_opciones_resp as $key1 => $value1) {
+              $inserto = $this->insert_response($value["idpregunta"], $value1, $id_aplica, $value["tipo"]);
+              if ($inserto) {
+                $band= TRUE;
+              }
+              else {
+                $this->db->trans_rollback();
+                return FALSE;
+              }
+            }
+          }
+
+        }
+      }
+      if ($band==TRUE) {
+        $this->db->trans_commit();
+        // $this->db->trans_rollback();
+        return $id_aplica;
+      }
+      else {
+        $this->db->trans_rollback();
+        return FALSE;
+      }
+    }
+
 }
