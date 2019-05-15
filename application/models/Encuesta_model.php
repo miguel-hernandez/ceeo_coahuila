@@ -19,6 +19,7 @@ class Encuesta_model extends CI_Model {
       FROM aplicar ap
       LEFT JOIN respuesta r ON ap.idaplicar=r.idaplicar
       WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=1
+      ORDER BY fcreacion DESC
     ";
 
     // echo $str_query; die();
