@@ -19,10 +19,10 @@ class Encuesta extends CI_Controller {
       // $result2 = $result;
       // $arr_columnas = array("id","nvisitas","cct","nombre_ct","turno", "nombre_nivel","nombre_modalidad","domicilio");
       $arr_columnas = array(
-        "id"=>array("type"=>"text", "header"=>"Folio"),
-        "fcreacion"=>array("type"=>"hidden", "header"=>"Fecha de aplicación"),
-        "n_documento"=>array("type"=>"text", "header"=>"Nombre del documento"),
-        "a_adjunto"=>array("type"=>"button", "header"=>"Evidencia")
+        "id"=>array("type"=>"text", "width"=>"5", "header"=>"Folio"),
+        "fcreacion"=>array("type"=>"hidden", "width"=>"0", "header"=>"Fecha de aplicación"),
+        "n_documento"=>array("type"=>"text", "width"=>"85", "header"=>"Nombre del documento"),
+        "a_adjunto"=>array("type"=>"button", "width"=>"10", "header"=>"Evidencia")
       );
 
 
@@ -363,9 +363,11 @@ class Encuesta extends CI_Controller {
   public function get_arch_evidencia(){
       $idaplicar = $this->input->post('id_aplica');
       $result = $this->Encuesta_model->get_url_evidencia($idaplicar);
+      $nombre = $this->Encuesta_model->get_nombre_evidencia($idaplicar);
       // echo $idaplicar; die();
       $response = array(
-        "result" => $result
+        "result" => $result,
+        "nombre" => $nombre
       );
 
       envia_datos_json(200, $response, $this);

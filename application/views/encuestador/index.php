@@ -6,7 +6,7 @@
   </div><!-- .row -->
 
   <div class="row margintop10">
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
       <label>Total: </label> <span id="encuestador_total"></span>
     </div><!-- .col-lg-6 -->
 
@@ -19,13 +19,19 @@
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
       <a href="<?= base_url('Encuesta/aplicar') ?>" type="button" class="btn btn-primary btn-block">
         <i class="fa fa-pencil"></i>
-        Registrar
+        Registrar <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Registrar levantamiento de requerimiento"></i>
       </a>
     </div><!-- .col-md-2 -->
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
       <button id="btn_editar_respuestas" type="button" class="btn btn-primary btn-block">
         <i class="fa fa-pencil-square-o"></i>
         Editar
+      </a>
+    </div><!-- .col-md-2 -->
+    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+      <button id="btn_imprimir_encuesta" type="button" class="btn btn-primary btn-block">
+        <i class="fa fa-print"></i>
+        Imprimir
       </a>
     </div><!-- .col-md-2 -->
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
@@ -47,13 +53,17 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header  bgcolor-2">
-        <h5 class="modal-title color-6" id="exampleModalLongTitle">Archivo evidencia</h5>
         <button type="button" class="close color-6" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <center>
+        <h4 class="modal-title color-6" id="exampleModalLongTitle">Archivo evidencia</h4>
+        <h5>Nombre del documento: <label id="n_formato"></label></h5>
+      </center>
+
       </div>
       <div class="modal-body">
-        <iframe id="iframe_cont" src="" width="100%" height="100%"></iframe>
+        <iframe id="iframe_cont" src="" width="100%" height="500px"></iframe>
       </div>
     </div>
   </div>
@@ -81,6 +91,9 @@
      $("#iframe_cont").empty();
      // $("#iframe_cont").append(data.result);
      $("#iframe_cont").prop("src", data.result);
+     $("#n_formato").empty();
+     $("#n_formato").html(data.nombre);
+
 
       $("#exampleModal_ver_evidencia").modal("show");
 

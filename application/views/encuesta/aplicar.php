@@ -21,10 +21,15 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
+              <?php if ($pregunta['npregunta']==17){?>
+                <div class='col-xs-12'>
+                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
+                </div>
+              <?php } else {?>
               <div class='col-xs-12'>
                 <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
               </div>
-            <?php } ?>
+            <?php } } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
 
               <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
@@ -65,7 +70,7 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-          <a href="<?= base_url('Encuestador') ?>" class="btn btn-default btn-block">Regresar</a>
+          <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
         </div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
             <button id="btn_encuesta_guardar" type='button' class='btn btn-primary btn-block'>Guardar</button>

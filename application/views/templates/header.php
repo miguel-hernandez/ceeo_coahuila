@@ -40,7 +40,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <i class="fa fa-bars" aria-hidden="true"></i>
         </button>
-        <a class="navbar-brand" href="<?= base_url('/') ?>" style="display:block !important;">Nombre del proyecto</a>
+        <a class="navbar-brand" href="<?= base_url('/') ?>" style="display:block !important;">Simplificación Administrativa</a>
       </div>
       <div class="collapse navbar-collapse navbar_master" id="myNavbar">
         <ul class="nav navbar-nav">

@@ -124,8 +124,17 @@ class Encuesta_model extends CI_Model {
     ";
     // echo $str_query; die();
     return $this->db->query($str_query)->row('url_comple');
-  }// eliminar()
+  }// get_url_evidencia()
 
+
+function get_nombre_evidencia($idaplicar){
+  $str_query = " SELECT res.respuesta as respuesta
+  FROM respuesta res
+  WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = 1
+  ";
+  // echo $str_query; die();
+  return $this->db->query($str_query)->row('respuesta');
+}// get_nombre_evidencia()
 
 
 }

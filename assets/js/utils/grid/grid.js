@@ -22,13 +22,14 @@ function Grid(iddiv,columnas,arr_datos){
       if (objeto_columnas.hasOwnProperty(item)) { // hasOwnProperty() devuelve un booleano indicando si el objeto tiene EL item especificada.
         var tipo = objeto_columnas[item]["type"];
         var label = objeto_columnas[item]["header"];
+        var width = objeto_columnas[item]["width"];
         if(tipo=="hidden"){
           html += "<th id='"+item+"' hidden>";
           html += "<center>"+label+"</center>";
           html += "</th>";
         }
         else{
-          html += "<th id='"+item+"'>";
+          html += "<th id='"+item+"' width='"+width+"%'>";
           html += "<center>"+label+"</center>";
           html += "</th>";
         }

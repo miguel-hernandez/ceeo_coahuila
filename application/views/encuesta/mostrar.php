@@ -66,7 +66,7 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-          <a href="<?= base_url('Encuestador') ?>" class="btn btn-default btn-block">Regresar</a>
+          <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
         </div>
       </div><!-- .row -->
 
