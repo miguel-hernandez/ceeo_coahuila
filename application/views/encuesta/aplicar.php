@@ -67,8 +67,8 @@
       <?php $separado_por_comas1 = implode(",", $array_idpreguntas); ?>
       <input type="hidden" id="itxt_idpreguntas" value="<?= $separado_por_comas1 ?>">
 
-      <!-- <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="" ></iframe> -->
-      <iframe id="image_aplicar" name="image_aplicar" src="" width="100%" height="500" style="border: none;"></iframe>
+      <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="" ></iframe>
+      <!-- <iframe id="image_aplicar" name="image_aplicar" src="" width="100%" height="500" style="border: none;"></iframe> -->
       <input type="file" id="ifile_aplicar" name="ifile_aplicar" value="" class="image">
 
       <div class="row margintop10">
