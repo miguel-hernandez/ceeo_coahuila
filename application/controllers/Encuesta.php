@@ -309,6 +309,8 @@ class Encuesta extends CI_Controller {
         if($pregunta_ok['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){
           // $array_opciones = $pregunta_ok['array_complemento'];
           $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
+        }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_UNAOPCION) {
+          $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
         }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_ABIERTA) {
           $array_final_aux['respuesta'] = (isset($pregunta_ok['array_contesto'][0]['respuesta']))?$pregunta_ok['array_contesto'][0]['respuesta']:'';
         }
@@ -318,7 +320,7 @@ class Encuesta extends CI_Controller {
       $data['array_datos'] = $array_final;
       $array_file = $this->Encuesta_model->get_file_path($idaplicar);
       $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';
-      // echo "<pre>"; print_r($data); die();
+      // echo "<pre>"; print_r($array_final); die();
       pagina_basica($this, "encuesta/mostrar", $data);
     }// verifica_sesion_redirige()
   }// mostrar()
