@@ -116,7 +116,7 @@
     let str = $("#itxt_idpreguntas").val();
     array_ids = str.split(",");
     array_ids_ok = [];
-
+    // console.log(array_ids);
     for (var i = 0; i < array_ids.length; i++) {
       let array_aux = new Object();
       let todo = array_ids[i];

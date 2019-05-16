@@ -77,9 +77,13 @@ $(document).on('change','.checkbox_change',function(e) {
           if(array_ids_ok[i]['idpregunta'] == idpregunta){
             array_aux['idpregunta'] = idpregunta;
             array_aux['valor'] = valor;
-
-            array_ids_ok[i]['valores'].push(array_aux);
-
+            if (array_ids_ok[i]['tipo']==3) {
+                  array_ids_ok[i]['valores'].splice(0);
+                  array_ids_ok[i]['valores'].push(array_aux);
+            }
+            else {
+              array_ids_ok[i]['valores'].push(array_aux);
+            }
 
           }
         }
@@ -91,8 +95,10 @@ $(document).on('change','.checkbox_change',function(e) {
            for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
              if(array_ids_ok[i]['valores'][j]['valor'] == valor){
                array_ids_ok[i]['valores'].splice(j);
+               // console.info(array_ids_ok);
              }
            }
+
 
            // array_aux['idpregunta'] = idpregunta;
            // array_aux['valor'] = valor;
@@ -217,6 +223,17 @@ $("#btn_encuesta_guardar").click(function(e){
             $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
           }
 
+          if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
+            let string_ok = '';
+            for (var j = 0; j < valores.length; j++) {
+              let valor = valores[j]['valor'];
+              string_ok = string_ok+valor+'/';
+            }
+            string_ok = string_ok.substring(0, string_ok.length - 1);
+            array_ids_ok[i]['valores_string'] = string_ok;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
+          }
+
           /*
           for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
             if(array_ids_ok[i]['valores'][j]['valor'] == valor){
@@ -240,10 +257,12 @@ $("#btn_encuesta_guardar").click(function(e){
             array_ids_ok[m]['archivo'] = file_data
           }
         }// for
-        console.info("array_ids_ok");
-        console.info(array_ids_ok);
+        console.info("array_ids_ok");*/
+        // console.info(array_ids_ok);
         // return false;
-        */
+
+
+
         Aplicar.guardar_ok(array_ids_ok);
       }
       return false;

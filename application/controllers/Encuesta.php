@@ -219,7 +219,7 @@ class Encuesta extends CI_Controller {
 
         }
       }
-      // echo "<pre>";print_r($id_aplica);die();
+      // echo "<pre>";print_r($array_respuestas);die();
 
       $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
 

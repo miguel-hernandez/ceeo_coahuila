@@ -115,9 +115,13 @@ $(document).on('change','.checkbox_change',function(e) {
           if(array_ids_ok[i]['idpregunta'] == idpregunta){
             array_aux['idpregunta'] = idpregunta;
             array_aux['valor'] = valor;
-
-            array_ids_ok[i]['valores'].push(array_aux);
-
+            if (array_ids_ok[i]['tipo']==3) {
+                  array_ids_ok[i]['valores'].splice(0);
+                  array_ids_ok[i]['valores'].push(array_aux);
+            }
+            else {
+              array_ids_ok[i]['valores'].push(array_aux);
+            }
 
           }
         }
@@ -302,6 +306,15 @@ $("#btn_encuesta_editar").click(function(e){
             $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
           }
 
+          if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
+            let string_ok = '';
+              let valor = valores[0]['valor'];
+              string_ok = string_ok+valor+'/';
+            string_ok = string_ok.substring(0, string_ok.length - 1);
+            array_ids_ok[i]['valores_string'] = string_ok;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
+          }
+
           /*
           for (var j = 0; j < array_ids_ok[i]['valores'].length; j++) {
             if(array_ids_ok[i]['valores'][j]['valor'] == valor){
@@ -375,7 +388,7 @@ $("#btn_encuesta_editar").click(function(e){
         }
       })
       .done(function( data ) {
-        console.log(data);
+        // console.log(data);
         $("#wait").modal("hide");
         if (data.estatus) {
           bootbox.alert(data.respuesta, function(){
