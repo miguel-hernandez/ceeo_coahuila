@@ -43,7 +43,8 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $tipo = $usuario["tipo"];
       $data["titulo"] = "";
-      $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      $data["usuario"] = trae_datos_user($this,"");
 
       $array_preguntas = $this->Encuesta_model->get_cuestions();
       $array_preguntas_ok = array();
@@ -68,7 +69,8 @@ class Encuesta extends CI_Controller {
       // echo "<pre>";print_r($this->input->post('id_aplicar'));die();
       $data["id_aplicar"] = $id_aplica;
       $data["titulo"] = "";
-      $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      $data["usuario"] = trae_datos_user($this,"");
 
       $array_preguntas = $this->Encuesta_model->get_cuestions();
       $array_preguntas_ok = array();
@@ -281,7 +283,8 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $tipo = $usuario["tipo"];
       $data["titulo"] = "";
-      $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      $data["usuario"] = trae_datos_user($this,"");
 
       // $idaplicar = $this->input->post('idaplicar');
       // echo $idaplicar; die();

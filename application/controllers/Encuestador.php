@@ -11,10 +11,9 @@ class Encuestador extends CI_Controller {
 
   public function index(){
     if(verifica_sesion_redirige($this)){
-      $usuario = $this->session->userdata[DATOSUSUARIO];
-      $tipo = $usuario["tipo"];
+
       $data["titulo"] = "";
-      $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      $data["usuario"] = trae_datos_user($this,"");
       pagina_basica($this, "encuestador/index", $data);
     }
   }// index();

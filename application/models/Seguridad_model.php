@@ -8,7 +8,7 @@ class Seguridad_model extends CI_Model {
 
      function get_for_login($username,$clave) {
        $str_query = "SELECT se.username, se.clave, se.estatus, se.idusuario,
-                            us.nombre, us.paterno, us.materno, us.idtipousuario, tu.tipo
+                            us.nombre, us.paterno, us.materno, us.idtipousuario, tu.tipo, us.area_departamento
                       FROM seguridad se
                       INNER JOIN usuario us ON us.idusuario = se.idusuario
                       INNER JOIN tipousuario tu ON tu.idtipousuario = us.idtipousuario

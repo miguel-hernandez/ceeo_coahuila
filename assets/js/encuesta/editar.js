@@ -40,7 +40,8 @@ $('#ifile_aplicar').change(function() {
       var finalFile = canvas.toDataURL(fileType);
       // console.log(finalFile);
       // $('#image_aplicar').attr('src', finalFile);
-      $("#image_aplicar").prop("src", finalFile);
+      // $("#image_aplicar").prop("src", finalFile);
+      $("#image_aplicar").prop("src", "https://docs.google.com/viewer?url="+finalFile+"&embedded=true");
     }
   }
   reader.readAsDataURL(file);

@@ -25,8 +25,8 @@ class Administrador extends CI_Controller {
             break;
           }
           // $tipo =
-          $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
-
+          // $data["usuario"] = $tipo.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+          $data["usuario"] = trae_datos_user($this,"");
           pagina_basica($this, "administrador/index", $data);
         }
     }// index()

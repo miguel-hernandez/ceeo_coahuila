@@ -57,6 +57,15 @@
       }// pagina_basica()
     }
 
+    if(!function_exists('trae_datos_user')){
+      function trae_datos_user($contexto, $mensaje_extra="") {
+        $usuario = $contexto->session->userdata[DATOSUSUARIO];
+        $tipo = $usuario["tipo"];
+        $area = $usuario["area_departamento"];
+        return $mensaje_extra.' '.$area.' / '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      }// pagina_basica()
+    }
+
 
 
 ?>

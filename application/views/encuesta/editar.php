@@ -89,6 +89,10 @@
       <?php $separado_por_comas1 = implode(",", $array_idpreguntas); ?>
       <input type="hidden" id="itxt_idpreguntas" value="<?= $separado_por_comas1 ?>">
 
+      <!-- <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" ></iframe> -->
+      <iframe id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? 'https://docs.google.com/viewer?url='.$array_respuetas[0]['url_comple'].'&embedded=true' :'' ?>" width="100%" height="500" style="border: none;"></iframe>
+      <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image">
+
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
@@ -99,11 +103,6 @@
         </div>
 
       </div><!-- .row -->
-
-        <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? $array_respuetas[0]['url_comple']:'' ?>" ></iframe>
-        <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image">
-
-
       </form>
 
 
