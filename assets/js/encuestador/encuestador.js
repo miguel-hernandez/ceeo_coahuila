@@ -46,6 +46,12 @@ $("#btn_eliminar_encuesta").click(function(e){
 });
 
 
+$("#btn_imprimir_encuesta").click(function(e){
+  e.preventDefault();
+  Encuesta.imprimir();
+});
+
+
 let Encuesta = {
 
   listar : () => {
@@ -96,6 +102,18 @@ let Encuesta = {
     document.body.appendChild(form);
     form.submit();
   },
+
+  imprimir : () => {
+    let form = document.createElement("form");
+    /* let element1 = document.createElement("input"); */
+    form.name="form_mostrar";
+    form.method = "POST";
+    form.target = "_blank";
+    form.action = base_url+"reporte/area/";
+    document.body.appendChild(form);
+    form.submit();
+  },
+
 
   eliminar : (idaplicar) => {
     var ruta = base_url+"Encuesta/eliminar";
