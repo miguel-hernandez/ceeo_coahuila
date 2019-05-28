@@ -48,7 +48,7 @@ $('#ifile_aplicar').change(function() {
   // }
   // reader.readAsDataURL(file);
   // reader.onload();
-}
+
 });
 
 $(document).on('blur','.textarea_blur', function(e) {
