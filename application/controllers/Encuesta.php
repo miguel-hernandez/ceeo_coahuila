@@ -61,11 +61,11 @@ class Encuesta extends CI_Controller {
     }// verifica_sesion_redirige()
   }// aplicar()
 
-  public function editar(){
+  public function editar($id_aplica){
     if(verifica_sesion_redirige($this)){
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $tipo = $usuario["tipo"];
-      $id_aplica = $this->input->post('id_aplicar');
+      // $id_aplica = $this->input->post('id_aplicar');
       // echo "<pre>";print_r($this->input->post('id_aplicar'));die();
       $data["id_aplicar"] = $id_aplica;
       $data["titulo"] = "";
@@ -87,12 +87,12 @@ class Encuesta extends CI_Controller {
       $data['array_preguntas'] = $array_preguntas_ok;
       $data['array_respuetas'] = $this->Respuestas_model->get_response($id_aplica);
       // echo "<pre>";print_r($data);die();
-      $str_view_edit = $this->load->view("encuesta/editar", $data, TRUE);
-
-      $response = array(
-        "str_view_edit" => $str_view_edit
-      );
-      envia_datos_json(200, $response, $this);
+      // $str_view_edit = $this->load->view("encuesta/editar", $data, TRUE);
+      pagina_basica($this, "encuesta/editar", $data);
+      // $response = array(
+      //   "str_view_edit" => $str_view_edit
+      // );
+      // envia_datos_json(200, $response, $this);
     }// verifica_sesion_redirige()
   }// editar()
 
