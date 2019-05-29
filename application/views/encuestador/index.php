@@ -17,9 +17,9 @@
       </button>
     </div><!-- .col-md-2 -->
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-      <a href="<?= base_url('Encuesta/aplicar') ?>" type="button" class="btn btn-primary btn-block">
+      <a href="<?= base_url('Encuesta/aplicar') ?>" type="button" class="btn btn-primary btn-block" data-toggle="tooltip" data-placement="top" title="Registrar levantamiento de requerimiento">
         <i class="fa fa-pencil"></i>
-        Registrar <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Registrar levantamiento de requerimiento"></i>
+        Registrar
       </a>
     </div><!-- .col-md-2 -->
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
