@@ -285,12 +285,17 @@ $("#btn_encuesta_editar").click(function(e){
 
           if((array_ids_ok[i]['tipo'] == 2) || (array_ids_ok[i]['tipo'] == '2')){ // sólo checkbox
             let string_ok = '';
+            let valor = '';
             for (var j = 0; j < valores.length; j++) {
               // console.info("valores[j]['valor']");
               // console.info(valores[j]['valor']);
-              let valor = valores[j]['valor'];
+               valor = valores[j]['valor'];
               // console.info("valor: "+valor);
+              // console.info("string_ok: "+string_ok);
+              // console.info("i: "+i);
+              // console.info("j: "+j);
               string_ok = string_ok+valor+'/';
+            // console.info("string_ok: "+string_ok);
               // array_ids_ok[i]['valores'][j] = JSON.stringify(array_ids_ok[i]['valores'][j]);
               // Object.assign({}, array_ids_ok[i]['valores'][j]);
               // $.extend({}, array_ids_ok[i]['valores']);
@@ -300,8 +305,8 @@ $("#btn_encuesta_editar").click(function(e){
               // console.log(obj);
             }
             string_ok = string_ok.substring(0, string_ok.length - 1);
-            array_ids_ok[i]['valores_string'] = string_ok;
-            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
+            array_ids_ok[i]['valores_string'] = valor;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(valor);
           }
 
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
@@ -340,7 +345,7 @@ $("#btn_encuesta_editar").click(function(e){
         console.info(array_ids_ok);
         // return false;
         */
-        // console.log(array_ids_ok);
+        // console.info(array_ids_ok);
         Aplicar.editar_ok(array_ids_ok);
       // }
       return false;
