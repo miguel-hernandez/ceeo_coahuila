@@ -158,7 +158,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
@@ -224,7 +224,7 @@ class Encuesta extends CI_Controller {
       // echo "<pre>";print_r($array_respuestas);die();
 
       $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
-
+// echo "<pre>";print_r($nombre_archivo);die();
       // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
       // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
       $respuesta_estatus = $this->Respuestas_model->update_respuestas($array_respuestas,$nombre_archivo,$id_aplica,$usuario['idusuario']);
@@ -250,7 +250,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);

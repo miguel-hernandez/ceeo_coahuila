@@ -88,7 +88,7 @@
 
       <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? base_url($array_respuetas[0]['url_comple']):'' ?>" ></iframe>
       <!-- <iframe id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? 'https://docs.google.com/viewer?url='.base_url().$array_respuetas[0]['url_comple'].'&embedded=true' :'' ?>" width="100%" height="500" style="border: none;"></iframe> -->
-      <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image">
+      <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image" accept="image/*, .txt, .TXT, .pdf, .PDF, .docx, .DOCX, .doc, .DOC, .xlsx, .XLSX, .xls, .XLS, .pptx, .PPTX, .ppt, .PPT">
 
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>

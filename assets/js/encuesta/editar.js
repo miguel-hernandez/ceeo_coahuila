@@ -4,7 +4,9 @@ $('#ifile_aplicar').change(function() {
   var input = this;
   if (input.files && input.files[0]) {
   var file = input.files[0];
-  fileType = file.type;
+  var fileType = file.type;
+// console.info(fileType);
+//   console.info(fileType.search('application/vnd'));
 
   pdffile_url=URL.createObjectURL(file);
 // console.log(pdffile_url);
@@ -40,8 +42,19 @@ $('#ifile_aplicar').change(function() {
   //     ctx.drawImage(this, 0, 0, imageWidth, imageHeight);
   //     // The resized file ready for upload
   //     var finalFile = canvas.toDataURL(fileType);
-      // console.log(finalFile);
-      $('#image_aplicar').attr('src', pdffile_url);
+      // console.log(finalFile); || fileType.search('application/msword'==0
+      if (fileType.search('application/vnd')==0 ) {
+        $('#image_aplicar').attr('src', '');
+      }
+      else {
+        if (fileType.search('application/msword')==0 ) {
+          $('#image_aplicar').attr('src', '');
+        }
+        else {
+          $('#image_aplicar').attr('src', pdffile_url);
+        }
+      }
+
       // $("#image_aplicar").prop("src", "https://docs.google.com/viewer?url="+base_url+finalFile+"&embedded=true");
     }
 });
