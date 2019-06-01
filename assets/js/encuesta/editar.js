@@ -1,48 +1,18 @@
 
 $('#ifile_aplicar').change(function() {
-  // console.log(this.files);
+  
   var input = this;
   if (input.files && input.files[0]) {
   var file = input.files[0];
   var fileType = file.type;
-// console.info(fileType);
-//   console.info(fileType.search('application/vnd'));
+
+  if (fileType == '') {
+
+   $('#image_aplicar').attr('src', '../../assets/img/document.svg');
+}else{
 
   pdffile_url=URL.createObjectURL(file);
-// console.log(pdffile_url);
-  // var reader = new FileReader();
-  //
-  // reader.onload = function(e) {
-  //
-  // var image = new Image();
-  //   image.src = reader.result;
-  //   image.onload = function() {
-  //     var maxWidth = 400,
-  //         maxHeight = 400,
-  //         imageWidth = image.width,
-  //         imageHeight = image.height;
-  //
-  //     if (imageWidth > imageHeight) {
-  //       if (imageWidth > maxWidth) {
-  //         imageHeight *= maxWidth / imageWidth;
-  //         imageWidth = maxWidth;
-  //       }
-  //     }
-  //     else {
-  //       if (imageHeight > maxHeight) {
-  //         imageWidth *= maxHeight / imageHeight;
-  //         imageHeight = maxHeight;
-  //       }
-  //     }
-  //     var canvas = document.createElement('canvas');
-  //     canvas.width = imageWidth;
-  //     canvas.height = imageHeight;
-  //
-  //     var ctx = canvas.getContext("2d");
-  //     ctx.drawImage(this, 0, 0, imageWidth, imageHeight);
-  //     // The resized file ready for upload
-  //     var finalFile = canvas.toDataURL(fileType);
-      // console.log(finalFile); || fileType.search('application/msword'==0
+
       if (fileType.search('application/vnd')==0 ) {
         $('#image_aplicar').attr('src', '');
       }
@@ -55,8 +25,8 @@ $('#ifile_aplicar').change(function() {
         }
       }
 
-      // $("#image_aplicar").prop("src", "https://docs.google.com/viewer?url="+base_url+finalFile+"&embedded=true");
     }
+  }
 });
 
 $(document).on('blur','.textarea_blur', function(e) {

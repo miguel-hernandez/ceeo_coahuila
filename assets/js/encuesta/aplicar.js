@@ -1,12 +1,19 @@
 
 $('#ifile_aplicar').change(function() {
-  // console.log(this.files);
+ //console.log(this);
   $('#image_aplicar').attr('src', "");
   var input = this;
   if (input.files && input.files[0]) {
   var file = input.files[0];
   fileType = file.type;
+console.log(fileType);
+  if (fileType == '') {
+console.log(fileType);
+imagen = '../assets/img/document.svg';
+   $('#image_aplicar').attr('src', ''+imagen+'');
+}else{
 
+  console.log(fileType);
   pdffile_url=URL.createObjectURL(file);
 // console.log(pdffile_url);
   // var reader = new FileReader();
@@ -48,7 +55,7 @@ $('#ifile_aplicar').change(function() {
   // }
   // reader.readAsDataURL(file);
   // reader.onload();
-
+}
 });
 
 $(document).on('blur','.textarea_blur', function(e) {

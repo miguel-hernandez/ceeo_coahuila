@@ -74,7 +74,9 @@ function Grid(iddiv,columnas,arr_datos){
     }
     else{
       html += "<tr>";
+      html += "<td colspan='"+that_grid.columns.length+"'></td>";
       html += "<td colspan='"+that_grid.columns.length+"'>No hay datos para mostrar</td>";
+      html += "<td colspan='"+that_grid.columns.length+"'></td>";
       html += "</tr>";
     }
 
