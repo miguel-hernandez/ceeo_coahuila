@@ -158,7 +158,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt|txt';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
@@ -250,7 +250,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt|txt';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
