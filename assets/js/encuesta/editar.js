@@ -1,6 +1,6 @@
 
 $('#ifile_aplicar').change(function() {
-  
+// console.log(base_url+'/assets/img/document.svg');
   var input = this;
   if (input.files && input.files[0]) {
   var file = input.files[0];
@@ -8,7 +8,7 @@ $('#ifile_aplicar').change(function() {
 
   if (fileType == '') {
 
-   $('#image_aplicar').attr('src', '../../assets/img/document.svg');
+   $('#image_aplicar').attr('src', base_url+'/assets/img/document.svg');
 }else{
 
   pdffile_url=URL.createObjectURL(file);
