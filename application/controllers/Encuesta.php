@@ -116,6 +116,10 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $array_respuestas = array('array_datos' => array());
       foreach ($_POST as $key => $value) {
+         if ($value == 'Otro <input type="text" name="otro_input">') {
+             unset($array_respuestas['array_datos'][2]);
+        }
+        
         if (is_int($key)) {
           if ($band==TRUE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
@@ -127,7 +131,11 @@ class Encuesta extends CI_Controller {
         else {
           if ($band==TRUE) {
             $arr_cand =explode('_', $key);
+            if ($key=='otro_input') {
+             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
+            }
             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+            unset($array_respuestas['array_datos'][4]);
             $band=FALSE;
           }
           else {
@@ -135,7 +143,7 @@ class Encuesta extends CI_Controller {
           }
         }
       }
-      // echo "<pre>";print_r($array_respuestas);die();
+      // echo "<pre>";print_r($array_respuestas['array_datos']); die();
 
       $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
 
@@ -196,6 +204,9 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $array_respuestas = array('array_datos' => array());
       foreach ($_POST as $key => $value) {
+          if ($value == 'Otro <input type="text" name="otro_input">') {
+             unset($array_respuestas['array_datos'][2]);
+        }
         if (is_int($key)) {
           if ($band==TRUE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
@@ -211,7 +222,11 @@ class Encuesta extends CI_Controller {
           else {
             if ($band==TRUE) {
               $arr_cand =explode('_', $key);
+             if ($key=='otro_input') {
+             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
+            }
               array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+               unset($array_respuestas['array_datos'][4]);
               $band=FALSE;
             }
             else {
