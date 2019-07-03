@@ -21,7 +21,7 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==17){?>
+              <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){?>
                 <div class='col-xs-12'>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
                 </div>
