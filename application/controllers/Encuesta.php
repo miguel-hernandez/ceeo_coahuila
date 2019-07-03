@@ -116,6 +116,10 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $array_respuestas = array('array_datos' => array());
       foreach ($_POST as $key => $value) {
+        if ($key == 4) {
+        echo "<pre>";print_r($value);
+        array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
+        }
          if ($value == 'Otro <input type="text" name="otro_input">') {
              unset($array_respuestas['array_datos'][2]);
         }
@@ -135,7 +139,7 @@ class Encuesta extends CI_Controller {
              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
             }
             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
-            unset($array_respuestas['array_datos'][4]);
+           unset($array_respuestas['array_datos'][4]);
             $band=FALSE;
           }
           else {
@@ -143,7 +147,8 @@ class Encuesta extends CI_Controller {
           }
         }
       }
-      // echo "<pre>";print_r($array_respuestas['array_datos']); die();
+       echo "<pre>";print_r($array_respuestas['array_datos']);
+        //die();
 
       $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
 

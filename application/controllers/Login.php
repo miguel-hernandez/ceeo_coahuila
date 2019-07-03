@@ -60,7 +60,7 @@ class Login extends CI_Controller {
 		function direcciona_user($tipo_usuario){
 		switch ($tipo_usuario) {
 			case U_ADMINISTRADOR:
-				redirect('Adminsitrador', 'refresh');
+				redirect('Administrador', 'refresh');
 			break;
 			case U_ENCUESTADOR:
 				redirect('encuestador', 'refresh');
