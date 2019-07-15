@@ -305,7 +305,7 @@ class Encuesta extends CI_Controller {
       $data["titulo"] = "";
       // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
       $data["usuario"] = trae_datos_user($this,"");
-
+        $data['tipoUsuario'] = $tipo;
       // $idaplicar = $this->input->post('idaplicar');
       // echo $idaplicar; die();
 
@@ -316,8 +316,8 @@ class Encuesta extends CI_Controller {
         $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario($idaplicar, $pregunta['idpregunta']);
         array_push($array_preguntas_ok, $pregunta);
       }
-
-      // echo "<pre>"; print_r($array_preguntas_ok); die();
+        $nombreUsuario = $pregunta['array_contesto'][0]['Usuario'];
+      // echo "<pre>"; print_r( $pregunta['array_contesto'][0]['Usuario']); die();
       $array_final = array();
 
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {
@@ -326,7 +326,6 @@ class Encuesta extends CI_Controller {
         $array_final_aux['idtipopregunta'] = $pregunta_ok['idtipopregunta'];
         $array_final_aux['npregunta'] = $pregunta_ok['npregunta'];
         $array_final_aux['instructivo'] = $pregunta_ok['instructivo'];
-        // $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];
         $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];
 
         if($pregunta_ok['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){
@@ -343,7 +342,8 @@ class Encuesta extends CI_Controller {
       $data['array_datos'] = $array_final;
       $array_file = $this->Encuesta_model->get_file_path($idaplicar);
       $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';
-      // echo "<pre>"; print_r($array_final); die();
+      $data['nombreUsuario'] = $nombreUsuario;
+      // echo "<pre>"; print_r($data); die();
       pagina_basica($this, "encuesta/mostrar", $data);
     }// verifica_sesion_redirige()
   }// mostrar()

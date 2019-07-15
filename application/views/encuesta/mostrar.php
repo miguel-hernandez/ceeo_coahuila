@@ -1,11 +1,12 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading bg-color-1 text-center">
-      <h3 class="panel-title">Mostrar requerimiento</h3>
+      <h3 class="panel-title">Mostrar requerimiento / <?=$nombreUsuario?></h3>
     </div><!-- .panel-heading -->
     <div class="panel-body">
 
-      <?php foreach ($array_datos as $key => $dato) { ?>
+      <?php foreach ($array_datos as $key => $dato) {?>
+                  
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
@@ -66,7 +67,11 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
+          <?php   if ($tipoUsuario = 'ADMINISTRADOR' ) { ?>
+            <a href="<?= base_url('Administrador') ?>" class="btn btn-info btn-block">Regresar</a>
+         <?php } else {?>
           <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
+          <?php } ?>
         </div>
       </div><!-- .row -->
 

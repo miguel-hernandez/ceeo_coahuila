@@ -54,12 +54,12 @@ class Administrador extends CI_Controller {
             </thead>
             <tbody>";
     foreach ($archivos as $key => $value) {
-      $archivo = substr($value['archivo'],18);
+      $archivo = substr($value['archivo'],16);
       echo "<tr>
               <td scope='row'>".$value['idaplicar']."</td>
               <td>".$archivo."</td>
               <td>".$value['fcreacion']."</td>
-              <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'>
+              <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'>
                       <i class='fa fa-eye'></i> Mostrar
                    </button>
               </td>

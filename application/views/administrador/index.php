@@ -37,6 +37,27 @@
 				<?php } ?>
 			</div>
 
+			<div id="exampleModal_ver_evidencia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header  bgcolor-2">
+        <button type="button" class="close color-6" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <center>
+        <h4 class="modal-title color-6" id="exampleModalLongTitle">Archivo evidencia</h4>
+        <h5>Nombre del documento: <label id="n_formato"></label></h5>
+      </center>
+
+      </div>
+      <div class="modal-body">
+        <iframe id="iframe_cont" src="" width="100%" height="500px"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 		</div>
 	</div><!-- row -->
 </div><!-- container-fluid -->
@@ -64,8 +85,10 @@
 		});		
 	}
 
-	function mostrar_encuesta(idaplicar) {
+	function mostrar_encuesta(idaplicar, usuario) {
+		console.log('función mostrar: ' + usuario);
 		 let form = document.createElement("form");
+
     /* let element1 = document.createElement("input"); */
     form.name="form_mostrar";
     form.method = "POST";
@@ -93,12 +116,12 @@
      }
    })
    .done(function( data ) {
-      // console.log(data);
+      console.log(data);
      $("#wait").modal("hide");
 
      $("#iframe_cont").empty();
      $("#iframe_cont").append(data.result);
-     // $("#iframe_cont").prop("src", data.result);
+     $("#iframe_cont").prop("src", data.result);
      $("#n_formato").empty();
      $("#n_formato").html(data.nombre);
 
@@ -107,7 +130,7 @@
 
    })
    .fail(function(jqXHR, textStatus, errorThrown) {
-     // console.error("Error in read()"); console.table(e);
+     console.error("Error in read()"); console.table(e);
      $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
    });
 
