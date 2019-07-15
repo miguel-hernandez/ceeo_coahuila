@@ -57,7 +57,7 @@
           <?php }else { ?>
             <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
               <label>Archivo adjunto:</label><br>
-              <img src="<?= base_url($file_path) ?>" class="img-responsive">
+              <a href="<?= base_url($file_path) ?>" target="_blank"><img src="<?= base_url($file_path) ?>" class="img-responsive"></a>
             </div><!-- .col-lg-8 -->
           <?php } ?>
         <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'></div>
