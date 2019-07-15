@@ -67,7 +67,8 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-          <?php   if ($tipoUsuario = 'ADMINISTRADOR' ) { ?>
+          <?php   if ($tipoUsuario == 'ADMINISTRADOR' ) { ?>
+            <?php print_r($tipoUsuario); die(); ?>
             <a href="<?= base_url('Administrador') ?>" class="btn btn-info btn-block">Regresar</a>
          <?php } else {?>
           <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
