@@ -2,3 +2,5 @@
 /application/config/database.php
 # -- Ignora el conf----
 /application/config/config.php
+application/config/config_.php
+application/views/encuesta/editar.php

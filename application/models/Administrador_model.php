@@ -21,14 +21,12 @@ class Administrador_model extends CI_Model
 		return $this->db->query($str_query)->result_array();
 	} //getTabla()
 
-	public function getSubsecretaria()
-	{
+	public function getSubsecretaria(){
 		$str_query = "SELECT * FROM cat_subsecretaria;";
 		return $this->db->query($str_query)->result_array();
 	}
 
-	public function getUsuarios($idsub)
-	{
+	public function getUsuarios($idsub){
 		$str_query = "SELECT s.username, CONCAT(u.nombre, ' ' ,u.paterno, ' ', u.materno) as Usuario, count(a.idaplicar) as total, u.idusuario FROM seguridad s
 		INNER JOIN usuario u on u.idusuario = s.idusuario
 		LEFT JOIN aplicar a on a.idusuario = u.idusuario
@@ -38,13 +36,34 @@ class Administrador_model extends CI_Model
 		return $this->db->query($str_query)->result_array();
 	}
 
-	public function getArchivos($iduser)
-	{
+	public function getArchivos($iduser){
 		$str_query = "SELECT r.idaplicar, r.url_comple as archivo, a.fcreacion FROM respuesta r
 		INNER JOIN aplicar a on a.idaplicar = r.idaplicar
 		where a.idusuario = {$iduser} and url_comple IS NOT NULL;";
 		return $this->db->query($str_query)->result_array();
 	}
+
+	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $idaplicar) {		
+          $data = array(
+            'accionMejora' => $accion,
+            'especificarMejora' => $especificacion,
+            'justificarMejora' => $justificacion,
+            'notasAdicionales' => $notas 
+          );
+         
+      $where = array(
+            'idaplicar' => $idaplicar
+          );
+      $this->db->where($where);
+      return $this->db->update('aplicar', $data);
+
+	}
+
+	public function getObservaciones($idaplicar){
+		$str_query = "SELECT accionMejora, especificarMejora, justificarMejora, notasAdicionales FROM aplicar WHERE idaplicar = {$idaplicar};";
+		return $this->db->query($str_query)->result_array();
+	}
+	
 }
 
 ?>

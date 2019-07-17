@@ -72,6 +72,16 @@ class Administrador extends CI_Controller {
     return $archivos;
   }
 
+  public function guardarNotas(){
+    $accion = $this->input->post('accion');
+    $especificacion = $this->input->post('especificacion');
+    $justificacion = $this->input->post('justificacion');
+    $notas = $this->input->post('notas');
+    $idaplicar = $this->input->post('idaplicar');
+
+    $result = $this->Administrador_model->guardarNotas($accion, $especificacion, $justificacion, $notas, $idaplicar);
+    return $result;
+  }
 
   public function index(){
     if(verifica_sesion_redirige($this)){

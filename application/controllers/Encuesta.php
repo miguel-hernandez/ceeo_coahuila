@@ -9,7 +9,9 @@ class Encuesta extends CI_Controller {
     $this->load->model('Encuesta_model');
     $this->load->model('Respuestas_model');
     $this->load->model('Aplicar_model');
+    $this->load->model('Administrador_model');
   }
+
 
   function get_xidusuario(){
     if(verifica_sesion_redirige($this)){
@@ -339,10 +341,14 @@ class Encuesta extends CI_Controller {
         array_push($array_final, $array_final_aux);
       }
 
+      $array_observaciones = $this->Administrador_model->getObservaciones($idaplicar);
+
       $data['array_datos'] = $array_final;
       $array_file = $this->Encuesta_model->get_file_path($idaplicar);
       $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';
       $data['nombreUsuario'] = $nombreUsuario;
+      $data['idaplicar'] = $idaplicar;
+      $data['array_observaciones'] = $array_observaciones;
       // echo "<pre>"; print_r($data); die();
       pagina_basica($this, "encuesta/mostrar", $data);
     }// verifica_sesion_redirige()

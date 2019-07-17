@@ -6,7 +6,6 @@
     <div class="panel-body">
 
       <?php foreach ($array_datos as $key => $dato) {?>
-                  
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
@@ -48,17 +47,84 @@
       <?php
           $porciones = explode(".", $file_path);
           $extension = $porciones[1];
-
           if( ($extension == 'pdf') || $extension == 'PDF' ){ ?>
-              <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
+              <!-- <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'> -->
+                <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
                 <label>Archivo adjunto:</label><br>
                 <iframe src="https://docs.google.com/viewer?url=<?= base_url($file_path) ?>&embedded=true" width="100%" height="500" style="border: none;"></iframe>
               </div><!-- .col-lg-8 -->
           <?php }else { ?>
-            <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'>
+            <!-- <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'> -->
+              <div class='col-xs-7 col-sm-7 col-md-7 col-lg-7'>
               <label>Archivo adjunto:</label><br>
+
               <a href="<?= base_url($file_path) ?>" target="_blank"><img src="<?= base_url($file_path) ?>" class="img-responsive"></a>
-            </div><!-- .col-lg-8 -->
+
+            </div><!-- .col-lg-8 -->           
+          <?php } ?>
+          <?php if ($tipoUsuario == 'ADMINISTRADOR') { ?>
+            <?php foreach ($array_observaciones as $key => $adminDatos){ ?>
+              
+              <!-- sección nueva de administrador -->
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 7em;">
+                  <input type="number" id="idaplicar" value="<?=$idaplicar;?>" style="display: none;">
+                  <label>Acción de mejora</label>
+                  <br>
+                  <?php if ($adminDatos['accionMejora'] == null){ ?>
+                    
+                  <select id="accionSelect"  class="selectpicker">
+                    <option name="accion" value="1">Conservar</option>
+                    <option name="accion" value="2">Eliminar</option>
+                    <option name="accion" value="3">Fusionar</option>
+                    <option name="accion" value="4">Automatizar</option>
+                  </select>
+                  <?php } else { ?>
+                    <select id="accionSelect"  class="selectpicker">
+                  <?php switch ($adminDatos['accionMejora']) {
+                      case '1': ?>
+                      <option name="accion" value="1" selected>Conservar</option>  
+                      <option name="accion" value="2">Eliminar</option>
+                      <option name="accion" value="3">Fusionar</option>
+                      <option name="accion" value="4">Automatizar</option>   
+                    <?php break;
+                      case '2': ?>
+                      <option name="accion" value="1">Conservar</option>
+                      <option name="accion" value="2" selected>Eliminar</option>
+                      <option name="accion" value="3">Fusionar</option>
+                      <option name="accion" value="4">Automatizar</option>
+                    <?php break;
+                      case '3': ?>
+                      <option name="accion" value="1">Conservar</option>
+                      <option name="accion" value="2">Eliminar</option>
+                      <option name="accion" value="3" selected>Fusionar</option>
+                      <option name="accion" value="4">Automatizar</option>
+                    
+                    <?php break;
+                      case '4': ?>
+                      <option name="accion" value="1">Conservar</option>  
+                      <option name="accion" value="2">Eliminar</option>
+                      <option name="accion" value="3">Fusionar</option>
+                      <option name="accion" value="4" selected>Automatizar</option>
+                    <?php break;
+                    } ?>
+                    </select>
+                  <?php } ?>
+                  <br>
+                  <label>Especificar Acción</label>
+                  <textarea type="text" id="especificacionAccion" class="form-control textarea_blur" value="<?=$adminDatos['especificarMejora']?>"></textarea>
+                  <label>Justificación de la Acción de Mejora</label>
+                  <textarea type="text" id="justificacionAccion" class="form-control textarea_blur" value="<?=$adminDatos['justificarMejora']?>"></textarea>
+                  <label>Notas adicionales</label>
+                  <textarea type="text" id="notasAdicionales" class="form-control textarea_blur" value="<?=$adminDatos['notasAdicionales']?>"></textarea>
+                  <br>
+                  <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                  <a id="guardarNotas" class="btn btn-info btn-block">Guardar</a>
+                </div>
+                </div>
+              </div> 
+              <!-- sección nueva de administrador -->
+              <?php } ?>
           <?php } ?>
         <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'></div>
       </div><!-- .row -->
@@ -80,3 +146,27 @@
   </div><!-- .panel -->
 
 </div><!-- container -->
+
+<script type="text/javascript">
+  $('#guardarNotas').click(function () {
+    accion = $('#accionSelect').val();
+    especificacion = $('#especificacionAccion').val();
+    justificacion = $('#justificacionAccion').val();
+    notas = $('#notasAdicionales').val();
+    idaplicar = $('#idaplicar').val();
+
+    var ruta = base_url+"Administrador/guardarNotas";
+    $.ajax({
+      url: ruta,
+      type: 'POST',
+      data: {accion:accion, especificacion:especificacion, justificacion:justificacion,notas:notas, idaplicar:idaplicar},
+      success : function(data) {
+         bootbox.alert('Se guardaron correctamente las observaciones', function(){
+            window.location.href = base_url+"encuesta/"+idaplicar;
+        });
+      }
+    });
+   
+    
+  });
+</script>
