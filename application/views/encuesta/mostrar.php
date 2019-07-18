@@ -161,6 +161,7 @@
                           <option name="accion" value="2">Eliminar</option>
                           <option name="accion" value="3">Fusionar</option>
                           <option name="accion" value="4">Automatizar</option>
+                          <option name="accion" value="5">Compactar</option>
                         </select>
                       <?php } else { ?>
                         <select id="accionSelect"  class="selectpicker">
@@ -169,26 +170,37 @@
                             <option name="accion" value="1" selected>Conservar</option>  
                             <option name="accion" value="2">Eliminar</option>
                             <option name="accion" value="3">Fusionar</option>
-                            <option name="accion" value="4">Automatizar</option>   
+                            <option name="accion" value="4">Automatizar</option> 
+                            <option name="accion" value="5">Compactar</option>  
                             <?php break;
                             case '2': ?>
                             <option name="accion" value="1">Conservar</option>
                             <option name="accion" value="2" selected>Eliminar</option>
                             <option name="accion" value="3">Fusionar</option>
                             <option name="accion" value="4">Automatizar</option>
+                            <option name="accion" value="5">Compactar</option>
                             <?php break;
                             case '3': ?>
                             <option name="accion" value="1">Conservar</option>
                             <option name="accion" value="2">Eliminar</option>
                             <option name="accion" value="3" selected>Fusionar</option>
                             <option name="accion" value="4">Automatizar</option>
-
+                            <option name="accion" value="5">Compactar</option>
                             <?php break;
                             case '4': ?>
                             <option name="accion" value="1">Conservar</option>  
                             <option name="accion" value="2">Eliminar</option>
                             <option name="accion" value="3">Fusionar</option>
                             <option name="accion" value="4" selected>Automatizar</option>
+                            <option name="accion" value="5">Compactar</option>
+                            <?php break;
+                             <?php break;
+                            case '5': ?>
+                            <option name="accion" value="1">Conservar</option>  
+                            <option name="accion" value="2">Eliminar</option>
+                            <option name="accion" value="3">Fusionar</option>
+                            <option name="accion" value="4">Automatizar</option>
+                            <option name="accion" value="5" selected>Compactar</option>
                             <?php break;
                           } ?>
                         </select>
