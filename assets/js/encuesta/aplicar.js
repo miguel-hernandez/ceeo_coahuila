@@ -348,7 +348,7 @@ $("#btn_encuesta_guardar").click(function(e){
 
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-        $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+        // $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
       });
     }
 

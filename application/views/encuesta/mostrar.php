@@ -17,7 +17,7 @@
           </div>
           <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
             <div class='col-xs-12'>
-              <textarea class='form-control' rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
+              <textarea class='form-control' style="height: 120px;" rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
             </div><!-- .col-xs-12 -->
           <?php } ?>
           <?php if($dato['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
@@ -194,7 +194,6 @@
                             <option name="accion" value="4" selected>Automatizar</option>
                             <option name="accion" value="5">Compactar</option>
                             <?php break;
-                             <?php break;
                             case '5': ?>
                             <option name="accion" value="1">Conservar</option>  
                             <option name="accion" value="2">Eliminar</option>

@@ -23,11 +23,11 @@
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){?>
                 <div class='col-xs-12'>
-                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
+                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"></textarea>
                 </div>
               <?php } else {?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"></textarea>
+                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"></textarea>
               </div>
             <?php } } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>

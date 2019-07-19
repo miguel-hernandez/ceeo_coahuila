@@ -22,11 +22,11 @@
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
+                <textarea style="height: 120px;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
               </div>
               <?php } else {?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
+                <textarea style="height: 120px;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
               </div>
             <?php } } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
@@ -88,7 +88,7 @@
 
       <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? base_url($array_respuetas[0]['url_comple']):'' ?>" ></iframe>
       <!-- <iframe id="image_aplicar" name="image_aplicar" src="<?=($array_respuetas[0]['idpregunta']=='')? 'https://docs.google.com/viewer?url='.base_url().$array_respuetas[0]['url_comple'].'&embedded=true' :'' ?>" width="100%" height="500" style="border: none;"></iframe> -->
-      <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image" accept="image/*, .txt, .TXT, .pdf, .PDF, .docx, .DOCX, .doc, .DOC, .xlsx, .XLSX, .xls, .XLS, .pptx, .PPTX, .ppt, .PPT">
+      <input type="file" id="ifile_aplicar" src="img_submit.png" name="ifile_aplicar" value="" class="image" accept="image/*, .pdf, .PDF">
 
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
