@@ -116,10 +116,24 @@ class Encuesta extends CI_Controller {
       $band = TRUE;
       $estatus_arch = TRUE;
       $usuario = $this->session->userdata[DATOSUSUARIO];
+       switch ($usuario['idsubsecretaria']) {
+       case '1':
+        $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
+         break;
+        case '2':    
+        $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
+          break;
+          case '3':
+        $subsecretaria = 'Sub_Pla_Edu_'.$usuario['username'];
+            break;
+       default:
+         $subsecretaria = 'otra_subsecreatria_'.$usuario['username'];
+         break;
+     }
       $array_respuestas = array('array_datos' => array());
       foreach ($_POST as $key => $value) {
         if ($key == 4) {
-        echo "<pre>";print_r($value);
+        // echo "<pre>";print_r($value);
         array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
         }
          if ($value == 'Otro <input type="text" name="otro_input">') {
@@ -149,23 +163,40 @@ class Encuesta extends CI_Controller {
           }
         }
       }
-       echo "<pre>";print_r($array_respuestas['array_datos']);
+       // echo "<pre>";print_r($array_respuestas['array_datos']);
         //die();
+     $i = strlen($_FILES['ifile_aplicar']['name']);
+              for ($j=$i; $j > 1 ; $j--) { 
+               $extension = $_FILES['ifile_aplicar']['name'];
+               $extension = substr($extension,$j);
+               if (stristr($extension, '.')) {
+                  $extension_archivo = $extension;
+                 break;
+               }
+              }
 
-      $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
+               $fecha = date_create();
+              $idfecha = date_timestamp_get($fecha);
+
+              $nuevo_nombre_archivo = $subsecretaria.'_'.$idfecha.$extension_archivo;
+
 
       // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
       // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
-      $id_aplica = $this->Respuestas_model->insert_respuestas($array_respuestas,$nombre_archivo,$usuario['idusuario']);
+      $id_aplica = $this->Respuestas_model->insert_respuestas($array_respuestas,$nuevo_nombre_archivo,$usuario['idusuario']);
 
       if ($id_aplica > 0) {
-        if ($nombre_archivo!='') {
+        if ($nuevo_nombre_archivo!='') {
               $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
               // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
+             
+            
+            
 
               if(!is_dir($ruta_archivos)){
                 mkdir($ruta_archivos, 0777, true);}
-                $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
+                // $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
+                $_FILES['userFile']['name']     = $nuevo_nombre_archivo;
                 $_FILES['userFile']['type']     = $_FILES['ifile_aplicar']['type'];
                 $_FILES['userFile']['tmp_name'] = $_FILES['ifile_aplicar']['tmp_name'];
                 $_FILES['userFile']['error']    = $_FILES['ifile_aplicar']['error'];
@@ -173,7 +204,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt|txt';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
@@ -188,6 +219,7 @@ class Encuesta extends CI_Controller {
         if ($estatus_arch) {
           $data = array('estatus' => $estatus_arch, 'respuesta' => "El requerimiento se guardó correctamente.");
           envia_datos_json(200,$data, $this);
+          // echo "<pre>"; print_r($data); die();
         }
         else {
             $data = array('estatus' => $estatus_arch, 'respuesta' => "Falló al insertar archivo.");
@@ -202,18 +234,36 @@ class Encuesta extends CI_Controller {
   }// guardar()
 
   public function editar_insert(){
-     // echo "<pre>";print_r($_POST);die();
-     // $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
-     // echo "<pre>";print_r($_FILES);die();
      if(verifica_sesion_redirige($this)){
       $band = TRUE;
       $estatus_arch = TRUE;
       $usuario = $this->session->userdata[DATOSUSUARIO];
+      // echo "<pre>"; print_r($_POST); die();
+     switch ($usuario['idsubsecretaria']) {
+       case '1':
+        $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
+         break;
+        case '2':    
+        $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
+          break;
+          case '3':
+        $subsecretaria = 'Sub_Pla_Edu_'.$usuario['username'];
+            break;
+       default:
+         $subsecretaria = 'otra_subsecreatria_'.$usuario['username'];
+         break;
+     }
       $array_respuestas = array('array_datos' => array());
-      foreach ($_POST as $key => $value) {
-          if ($value == 'Otro <input type="text" name="otro_input">') {
+      
+       foreach ($_POST as $key => $value) {
+        if ($key == 4) {
+        
+        array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
+        }
+         if ($value == 'Otro <input type="text" name="otro_input">') {
              unset($array_respuestas['array_datos'][2]);
         }
+        
         if (is_int($key)) {
           if ($band==TRUE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
@@ -232,27 +282,46 @@ class Encuesta extends CI_Controller {
              if ($key=='otro_input') {
              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
             }
-              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
-               unset($array_respuestas['array_datos'][4]);
-              $band=FALSE;
-            }
-            else {
-              $band=TRUE;
-            }
+            array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+           unset($array_respuestas['array_datos'][4]);
+            $band=FALSE;
           }
-
+          else {
+            $band=TRUE;
+          }
         }
       }
-      // echo "<pre>";print_r($array_respuestas);die();
+    }
 
-      $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
-// echo "<pre>";print_r($nombre_archivo);die();
+    $i = strlen($_FILES['ifile_aplicar']['name']);
+    if ($i > 0) {
+       for ($j=$i; $j > 1 ; $j--) { 
+               $extension = $_FILES['ifile_aplicar']['name'];
+               $extension = substr($extension,$j);
+               if (stristr($extension, '.')) {
+                  $extension_archivo = $extension;
+                 break;
+               }
+              }
+
+               $fecha = date_create();
+              $idfecha = date_timestamp_get($fecha);
+
+              $nuevo_nombre_archivo = $subsecretaria.'_'.$id_aplica.'_'.$idfecha.$extension_archivo;
+    } else{
+       $nuevo_nombre_archivo = $_FILES['ifile_aplicar']['name'];
+    }
+
+            
+
+             
+
       // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
       // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
-      $respuesta_estatus = $this->Respuestas_model->update_respuestas($array_respuestas,$nombre_archivo,$id_aplica,$usuario['idusuario']);
+      $respuesta_estatus = $this->Respuestas_model->update_respuestas($array_respuestas,$nuevo_nombre_archivo ,$id_aplica,$usuario['idusuario']);
 
       if ($id_aplica > 0) {
-        if ($nombre_archivo!='') {
+        if ($nuevo_nombre_archivo!='') {
 
           $files = glob("evidencias/{$usuario['idusuario']}/{$id_aplica}/*"); //obtenemos todos los nombres de los ficheros
           foreach($files as $file){
@@ -260,11 +329,15 @@ class Encuesta extends CI_Controller {
             unlink($file); //elimino el fichero
             }
               $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
-              // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
 
+              
+            
+               
+                
               if(!is_dir($ruta_archivos)){
                 mkdir($ruta_archivos, 0777, true);}
-                $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
+                // $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
+                $_FILES['userFile']['name']     = $nuevo_nombre_archivo;
                 $_FILES['userFile']['type']     = $_FILES['ifile_aplicar']['type'];
                 $_FILES['userFile']['tmp_name'] = $_FILES['ifile_aplicar']['tmp_name'];
                 $_FILES['userFile']['error']    = $_FILES['ifile_aplicar']['error'];
@@ -272,7 +345,7 @@ class Encuesta extends CI_Controller {
 
                 $uploadPath              = $ruta_archivos;
                 $config['upload_path']   = $uploadPath;
-                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf|docx|xlsx|pptx|doc|xls|ppt|txt';
+                $config['allowed_types'] = 'gif|bmp|jpg|png|jpeg|pdf';
 
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);

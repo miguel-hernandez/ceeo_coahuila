@@ -334,8 +334,8 @@ $("#btn_encuesta_guardar").click(function(e){
           $("#wait").modal("show");
         }
       })
-      .done(function( data ) {
-        console.log(data);
+      .done(function(data) {
+        
         $("#wait").modal("hide");
         if (data.estatus) {
           bootbox.alert(data.respuesta, function(){
@@ -347,8 +347,8 @@ $("#btn_encuesta_guardar").click(function(e){
         }
 
       })
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        // $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+      .fail(function(jqXHR, textStatus, errorThrown, data) {
+        $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
       });
     }
 
