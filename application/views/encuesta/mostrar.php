@@ -74,7 +74,152 @@
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <input type="number" id="idaplicar" value="<?=$idaplicar;?>" style="display: none;">
-                    <div class='col-xs-12 col-sm-12 col-md-7 col-lg-7'>
+                     <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                      <label>Tema</label>
+                      <br>
+                      <?php if ($adminDatos['tema'] == null){ ?>
+
+                        <select id="temaSelect"  class="selectpicker">
+                          <option name="tema" value="1">Administración de Personal</option>
+                          <option name="tema" value="2">Participación Social</option>
+                          <option name="tema" value="3">Gestión Escolar</option>
+                          <option name="tema" value="4">Recursos Materiales</option>
+                          <option name="tema" value="5">Planeación y Estadística</option>
+                          <option name="tema" value="6">Protección Civil</option>
+                          <option name="tema" value="7">Recursos Financieros</option>
+                          <option name="tema" value="8">Programas Federales</option>
+                          <option name="tema" value="9">Control Escolar</option>
+                          <option name="tema" value="10">Personal</option>
+
+                        </select>
+                      <?php } else { ?>
+                        <select id="temaSelect"  class="selectpicker">
+                          <?php switch ($adminDatos['tema']) {
+                            case '1': ?>
+                            <option name="tema" value="1" selected>Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '2': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2" selected>Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '3': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3" selected>Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '4': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4" selected>Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '5': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5" selected>Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '6': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6" selected>Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '7': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7" selected>Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '8': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8" selected>Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '9': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9" selected>Control Escolar</option>
+                            <option name="tema" value="10">Personal</option>
+                            <?php break;
+                            case '10': ?>
+                            <option name="tema" value="1">Administración de Personal</option>
+                            <option name="tema" value="2">Participación Social</option>
+                            <option name="tema" value="3">Gestión Escolar</option>
+                            <option name="tema" value="4">Recursos Materiales</option>
+                            <option name="tema" value="5">Planeación y Estadística</option>
+                            <option name="tema" value="6">Protección Civil</option>
+                            <option name="tema" value="7">Recursos Financieros</option>
+                            <option name="tema" value="8">Programas Federales</option>
+                            <option name="tema" value="9">Control Escolar</option>
+                            <option name="tema" value="10" selected>Personal</option>
+                            <?php break;
+                          } ?>
+                        </select>
+                      <?php } ?>
+                    </div>
+                    <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
                       <label>¿Quién llena el requerimiento?</label>
                       <br>
                       <?php if ($adminDatos['responsableDocumento'] == null){ ?>
@@ -151,10 +296,10 @@
                         </select>
                       <?php } ?>
                     </div>
-                    <div class='col-xs-12 col-sm-12 col-md-5 col-lg-5'>
+                    <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
                       <label>Acción de mejora</label>
                       <br>
-                      <?php if ($adminDatos['accionMejora'] == null){ ?>
+                      <?php if ($adminDatos['tema'] == null){ ?>
 
                         <select id="accionSelect"  class="selectpicker">
                           <option name="accion" value="1">Conservar</option>
@@ -165,7 +310,7 @@
                         </select>
                       <?php } else { ?>
                         <select id="accionSelect"  class="selectpicker">
-                          <?php switch ($adminDatos['accionMejora']) {
+                          <?php switch ($adminDatos['tema']) {
                             case '1': ?>
                             <option name="accion" value="1" selected>Conservar</option>  
                             <option name="accion" value="2">Eliminar</option>
@@ -266,6 +411,7 @@
         notas = $('#notasAdicionales').val();
         idaplicar = $('#idaplicar').val();
         encuestadoOtro = null;
+        tema = $('#temaSelect').val();
 
         if (encuestado == 6) {
         $('#encuestadoOtro').removeClass('ocultar');
@@ -278,7 +424,7 @@
         $.ajax({
           url: ruta,
           type: 'POST',
-          data: {accion:accion, especificacion:especificacion, justificacion:justificacion,notas:notas, encuestado:encuestado, encuestadoOtro:encuestadoOtro, idaplicar:idaplicar},
+          data: {accion:accion, especificacion:especificacion, justificacion:justificacion,notas:notas, encuestado:encuestado, encuestadoOtro:encuestadoOtro, tema:tema, idaplicar:idaplicar},
           success : function(data) {
            bootbox.alert('Se guardaron correctamente las observaciones', function(){
             window.location.href = base_url+"encuesta/"+idaplicar;

@@ -80,8 +80,9 @@ class Administrador extends CI_Controller {
     $notas = $this->input->post('notas');
     $idaplicar = $this->input->post('idaplicar');
     $encuestadoOtro = $this->input->post('encuestadoOtro');
+    $tema = $this->input->post('tema');
 
-    $result = $this->Administrador_model->guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $idaplicar);
+    $result = $this->Administrador_model->guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $idaplicar);
     return $result;
   }
 
