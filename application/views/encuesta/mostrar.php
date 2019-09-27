@@ -89,7 +89,7 @@
                           <option name="tema" value="7">Recursos Financieros</option>
                           <option name="tema" value="8">Programas Federales</option>
                           <option name="tema" value="9">Control Escolar</option>
-                          <option name="tema" value="10">Personal</option>
+                          <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
 
                         </select>
                       <?php } else { ?>
@@ -105,7 +105,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '2': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -117,7 +117,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '3': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -129,7 +129,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '4': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -141,7 +141,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '5': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -153,7 +153,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '6': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -165,7 +165,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '7': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -177,7 +177,7 @@
                             <option name="tema" value="7" selected>Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '8': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -189,7 +189,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8" selected>Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '9': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -201,7 +201,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9" selected>Control Escolar</option>
-                            <option name="tema" value="10">Personal</option>
+                            <option name="tema" value="10">Cooperativas y Tiendas Escolares</option>
                             <?php break;
                             case '10': ?>
                             <option name="tema" value="1">Administración de Personal</option>
@@ -213,7 +213,7 @@
                             <option name="tema" value="7">Recursos Financieros</option>
                             <option name="tema" value="8">Programas Federales</option>
                             <option name="tema" value="9">Control Escolar</option>
-                            <option name="tema" value="10" selected>Personal</option>
+                            <option name="tema" value="10" selected>Cooperativas y Tiendas Escolares</option>
                             <?php break;
                           } ?>
                         </select>
