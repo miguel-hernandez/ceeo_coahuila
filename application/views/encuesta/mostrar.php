@@ -74,7 +74,7 @@
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <input type="number" id="idaplicar" value="<?=$idaplicar;?>" style="display: none;">
-                     <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                     <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
                       <label>Tema</label>
                       <br>
                       <?php if ($adminDatos['tema'] == null){ ?>
@@ -219,7 +219,46 @@
                         </select>
                       <?php } ?>
                     </div>
-                    <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+    <!--  -->
+    <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+  <label>Sostenimiento</label>
+  <br>
+  <?php if ($adminDatos['sostenimiento'] == null){ ?>
+
+    <select id="sostenimientoSelect"  class="selectpicker">
+      <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
+      <option name="sostenimiento" value="Federal">Federal</option>
+      <option name="sostenimiento" value="Estatal">Estatal</option>
+
+    </select>
+  <?php } else { ?>
+    <select id="sostenimientoSelect"  class="selectpicker">
+      <?php switch ($adminDatos['sostenimiento']) {
+        case 'Estatal / Federal': ?>
+        <option name="sostenimiento" value="Estatal / Federal" selected>Estatal / Federal</option>
+        <option name="sostenimiento" value="Federal">Federal</option>
+        <option name="sostenimiento" value="Estatal">Estatal</option>
+
+        <?php break;
+        case 'Federal': ?>
+        <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
+        <option name="sostenimiento" value="Federal" selected>Federal</option>
+        <option name="sostenimiento" value="Estatal">Estatal</option>
+
+        <?php break;
+        case 'Estatal': ?>
+        <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
+        <option name="sostenimiento" value="Federal">Federal</option>
+        <option name="sostenimiento" value="Estatal" selected>Estatal</option>
+
+        <?php break; 
+        }?>
+        
+      </select>
+    <?php } ?>
+  </div>
+    <!--  -->
+                    <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
                       <label>¿Quién llena el requerimiento?</label>
                       <br>
                       <?php if ($adminDatos['responsableDocumento'] == null){ ?>
@@ -296,7 +335,7 @@
                         </select>
                       <?php } ?>
                     </div>
-                    <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                    <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
                       <label>Acción de mejora</label>
                       <br>
                       <?php if ($adminDatos['tema'] == null){ ?>
@@ -412,6 +451,7 @@
         idaplicar = $('#idaplicar').val();
         encuestadoOtro = null;
         tema = $('#temaSelect').val();
+        sostenimiento = $('#sostenimientoSelect').val();
 
         if (encuestado == 6) {
         $('#encuestadoOtro').removeClass('ocultar');
@@ -424,7 +464,7 @@
         $.ajax({
           url: ruta,
           type: 'POST',
-          data: {accion:accion, especificacion:especificacion, justificacion:justificacion,notas:notas, encuestado:encuestado, encuestadoOtro:encuestadoOtro, tema:tema, idaplicar:idaplicar},
+          data: {accion:accion, especificacion:especificacion, justificacion:justificacion,notas:notas, encuestado:encuestado, encuestadoOtro:encuestadoOtro, tema:tema, sostenimiento:sostenimiento, idaplicar:idaplicar},
           success : function(data) {
            bootbox.alert('Se guardaron correctamente las observaciones', function(){
             window.location.href = base_url+"encuesta/"+idaplicar;

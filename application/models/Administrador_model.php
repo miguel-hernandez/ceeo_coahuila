@@ -43,7 +43,7 @@ class Administrador_model extends CI_Model
 		return $this->db->query($str_query)->result_array();
 	}
 
-	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $idaplicar) {	
+	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $sostenimiento, $idaplicar) {	
 			
 
           $data = array(
@@ -53,7 +53,8 @@ class Administrador_model extends CI_Model
             'notasAdicionales' => $notas, 
             'responsableDocumento' => $encuestado,
             'otroResponsable' => $encuestadoOtro,
-            'tema'=> $tema
+            'tema'=> $tema,
+            'sostenimiento'=> $sostenimiento
           );
          
       $where = array(
@@ -65,7 +66,7 @@ class Administrador_model extends CI_Model
 	}
 
 	public function getObservaciones($idaplicar){
-		$str_query = "SELECT accionMejora, especificarMejora, justificarMejora, notasAdicionales, responsableDocumento, otroResponsable,tema FROM aplicar WHERE idaplicar = {$idaplicar};";
+		$str_query = "SELECT accionMejora, especificarMejora, justificarMejora, notasAdicionales, responsableDocumento, otroResponsable,tema, sostenimiento FROM aplicar WHERE idaplicar = {$idaplicar};";
 		return $this->db->query($str_query)->result_array();
 	}
 	
