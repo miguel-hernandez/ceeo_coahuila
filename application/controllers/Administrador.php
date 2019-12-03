@@ -49,6 +49,8 @@ class Administrador extends CI_Controller {
               <th scope='col'>ID Encuesta</th>
               <th scope='col'>Archivo</th>
               <th scope='col'>Fecha</th>
+              <th scope='col'>Editar</th>
+              <th scope='col'>Eliminar</th>
               <th scope='col'>Mostrar</th>
               <th scope='col'>Evidencia</th>
             </thead>
@@ -59,6 +61,8 @@ class Administrador extends CI_Controller {
               <td scope='row'>".$value['idaplicar']."</td>
               <td>".$archivo."</td>
               <td>".$value['fcreacion']."</td>
+              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button> 
+              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button> 
               <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'>
                       <i class='fa fa-eye'></i> Mostrar
                    </button>
@@ -87,18 +91,21 @@ class Administrador extends CI_Controller {
     return $result;
   }
 
+  public function eliminar_req() {
+    $idaplicar = $this->input->post('id');
+
+    $result = $this->Administrador_model->eliminar_req($idaplicar);
+    $response = ($result != 0) ? true : false;
+    envia_datos_json(200, $response, $this);
+  }
+
   public function index(){
     if(verifica_sesion_redirige($this)){
       $data["titulo"] = "COORDINADOR";
       $usuario = $this->session->userdata[DATOSUSUARIO];
           // echo "<pre>"; print_r($usuario); die();
       switch ($usuario["idtipousuario"]) {
-            // case U_VISITADOR:
-            //   $tipo = "VISITADOR: ";
-            // break;
-            // case U_COORDINADOR:
-            //   $tipo = "COORDINADOR: ";
-            // break;
+          
         case U_ADMINISTRADOR:
         $tipo = "ADMINISTRADOR: ";
         break;

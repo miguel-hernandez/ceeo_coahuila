@@ -226,29 +226,29 @@
   <?php if ($adminDatos['sostenimiento'] == null){ ?>
 
     <select id="sostenimientoSelect"  class="selectpicker">
-      <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
-      <option name="sostenimiento" value="Federal">Federal</option>
+      <option name="sostenimiento" value="Estatal - Federalizado">Estatal - Federalizado</option>
+      <option name="sostenimiento" value="Federalizado">Federalizado</option>
       <option name="sostenimiento" value="Estatal">Estatal</option>
 
     </select>
   <?php } else { ?>
     <select id="sostenimientoSelect"  class="selectpicker">
       <?php switch ($adminDatos['sostenimiento']) {
-        case 'Estatal / Federal': ?>
-        <option name="sostenimiento" value="Estatal / Federal" selected>Estatal / Federal</option>
-        <option name="sostenimiento" value="Federal">Federal</option>
+        case 'Estatal / Federalizado': ?>
+        <option name="sostenimiento" value="Estatal - Federalizado" selected>Estatal - Federalizado</option>
+        <option name="sostenimiento" value="Federalizado">Federalizado</option>
         <option name="sostenimiento" value="Estatal">Estatal</option>
 
         <?php break;
-        case 'Federal': ?>
-        <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
-        <option name="sostenimiento" value="Federal" selected>Federal</option>
+        case 'Federalizado': ?>
+        <option name="sostenimiento" value="Estatal - Federalizado">Estatal - Federalizado</option>
+        <option name="sostenimiento" value="Federalizado" selected>Federalizado</option>
         <option name="sostenimiento" value="Estatal">Estatal</option>
 
         <?php break;
         case 'Estatal': ?>
-        <option name="sostenimiento" value="Estatal / Federal">Estatal / Federal</option>
-        <option name="sostenimiento" value="Federal">Federal</option>
+        <option name="sostenimiento" value="Estatal - Federalizado">Estatal - Federalizado</option>
+        <option name="sostenimiento" value="Federalizado">Federalizado</option>
         <option name="sostenimiento" value="Estatal" selected>Estatal</option>
 
         <?php break; 

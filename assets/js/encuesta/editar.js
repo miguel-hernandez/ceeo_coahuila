@@ -378,7 +378,11 @@ $("#btn_encuesta_editar").click(function(e){
         $("#wait").modal("hide");
         if (data.estatus) {
           bootbox.alert(data.respuesta, function(){
+            if (data.usuario == 'ADMINISTRADOR') {
+            window.location.href = base_url+"Administrador";
+            } else{
             window.location.href = base_url+"Encuestador";
+            }
         });
         }
         else {

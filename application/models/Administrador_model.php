@@ -31,7 +31,7 @@ class Administrador_model extends CI_Model
 		INNER JOIN usuario u on u.idusuario = s.idusuario
 		LEFT JOIN aplicar a on a.idusuario = u.idusuario
 		WHERE u.idsubsecretaria = {$idsub}
-		AND s.estatus <> 2
+		AND s.estatus <> 2 AND a.estatus = 1
 		GROUP BY u.idusuario;";
 		return $this->db->query($str_query)->result_array();
 	}
@@ -39,7 +39,7 @@ class Administrador_model extends CI_Model
 	public function getArchivos($iduser){
 		$str_query = "SELECT r.idaplicar, r.url_comple as archivo, a.fcreacion FROM respuesta r
 		INNER JOIN aplicar a on a.idaplicar = r.idaplicar
-		where a.idusuario = {$iduser} and url_comple IS NOT NULL;";
+		where a.idusuario = {$iduser} and url_comple IS NOT NULL AND a.estatus = 1;";
 		return $this->db->query($str_query)->result_array();
 	}
 
@@ -68,6 +68,21 @@ class Administrador_model extends CI_Model
 	public function getObservaciones($idaplicar){
 		$str_query = "SELECT accionMejora, especificarMejora, justificarMejora, notasAdicionales, responsableDocumento, otroResponsable,tema, sostenimiento FROM aplicar WHERE idaplicar = {$idaplicar};";
 		return $this->db->query($str_query)->result_array();
+	}
+
+	public function eliminar_req($idaplicar)
+	{
+		 $data = array(
+           'estatus'=> 0
+          );
+         
+      $where = array(
+            'idaplicar' => $idaplicar
+          );
+      $this->db->where($where);
+      return  $this->db->update('aplicar', $data);
+
+		
 	}
 	
 }

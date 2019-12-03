@@ -68,7 +68,7 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
       $tipo = $usuario["tipo"];
       // $id_aplica = $this->input->post('id_aplicar');
-      // echo "<pre>";print_r($this->input->post('id_aplicar'));die();
+      // echo "<pre>";print_r($usuario);die();
       $data["id_aplicar"] = $id_aplica;
       $data["titulo"] = "";
       // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
@@ -358,7 +358,7 @@ class Encuesta extends CI_Controller {
                 }
             }
         if ($estatus_arch) {
-          $data = array('estatus' => $estatus_arch, 'respuesta' => "El requerimiento se editó correctamente.");
+          $data = array('estatus' => $estatus_arch, 'respuesta' => "El requerimiento se editó correctamente.", 'usuario' => $usuario['tipo']);
           envia_datos_json(200,$data, $this);
         }
         else {
@@ -391,8 +391,8 @@ class Encuesta extends CI_Controller {
         $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario($idaplicar, $pregunta['idpregunta']);
         array_push($array_preguntas_ok, $pregunta);
       }
+      // echo "<pre>"; print_r( $pregunta['array_contesto']); die();
         $nombreUsuario = $pregunta['array_contesto'][0]['Usuario'];
-      // echo "<pre>"; print_r( $pregunta['array_contesto'][0]['Usuario']); die();
       $array_final = array();
 
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {

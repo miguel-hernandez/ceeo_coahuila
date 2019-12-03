@@ -86,19 +86,11 @@
 	}
 
 	function mostrar_encuesta(idaplicar, usuario) {
-		console.log('función mostrar: ' + usuario);
 		 let form = document.createElement("form");
 
-    /* let element1 = document.createElement("input"); */
     form.name="form_mostrar";
     form.method = "POST";
     form.target = "_parent";
-    /*
-    element1.type="hidden";
-    element1.value = idaplicar;
-    element1.name="idaplicar";
-    form.appendChild(element1);
-    */
     form.action = base_url+"encuesta/"+idaplicar;
     document.body.appendChild(form);
     form.submit();
@@ -116,7 +108,6 @@
      }
    })
    .done(function( data ) {
-      console.log(data);
      $("#wait").modal("hide");
 
      $("#iframe_cont").empty();
@@ -135,5 +126,47 @@
    });
 
   };
+
+  function eliminar_ev(idaplicar,iduser) {
+  	ruta = base_url+'Administrador/eliminar_req';
+  	$.ajax({
+  		url: ruta,
+  		type: 'POST',
+  		dataType: 'json',
+  		data: {id: idaplicar},
+  		 beforeSend: function( xhr ) {
+       $("#wait").modal("show");
+     }
+  	})
+  	.done(function(data) {
+  		if (data) {
+  		alert('El requerimiento se ha eliminado exitosamente');
+  		traerArchivos(iduser);
+  		}else{
+  		alert('Error al eliminar');
+  		}
+
+  		 $("#wait").modal("hide");
+  	})
+  	 .fail(function(jqXHR, textStatus, errorThrown) {
+     console.error("Error in read()"); console.table(e);
+     $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+   });  	
+  }
+
+  function editar_ev(idaplicar) {
+  	 let form = document.createElement("form");
+
+    form.name="form_editar";
+    form.method = "POST";
+    form.target = "_parent";
+
+    form.action = base_url+"encuesta/edith/"+idaplicar;
+    document.body.appendChild(form);
+    form.submit();
+
+    
+
+  }
 </script>
 <!-- <script src="<?= base_url('assets/js/administrador/administrador.js') ?>"></script> -->
