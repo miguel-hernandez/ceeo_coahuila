@@ -78,13 +78,13 @@ class Encuesta_model extends CI_Model {
     // FROM respuesta res
     // WHERE res.idaplicar = ? AND res.idpregunta = ?
     // ";
-    $str_query = "SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT(u.nombre, ' ' ,u.paterno, ' ', u.materno) as Usuario
+    $str_query = "SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT_WS(' ', u.nombre, u.paterno, u.materno) as Usuario
 FROM respuesta res
 INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
 INNER JOIN usuario u on u.idusuario = ap.idusuario
-WHERE res.idaplicar = ? AND res.idpregunta = ?;";
+WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = {$idpregunta};";
     // echo $str_query; die();
-    return $this->db->query($str_query, array($idaplicar, $idpregunta))->result_array();
+    return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario()
 
   function get_file_path($idaplicar){

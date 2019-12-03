@@ -220,7 +220,7 @@
                       <?php } ?>
                     </div>
     <!--  -->
-    <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+   <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
   <label>Sostenimiento</label>
   <br>
   <?php if ($adminDatos['sostenimiento'] == null){ ?>
@@ -234,13 +234,13 @@
   <?php } else { ?>
     <select id="sostenimientoSelect"  class="selectpicker">
       <?php switch ($adminDatos['sostenimiento']) {
-        case 'Estatal / Federalizado': ?>
+        case 'Estatal - Federalizado': ?>
         <option name="sostenimiento" value="Estatal - Federalizado" selected>Estatal - Federalizado</option>
         <option name="sostenimiento" value="Federalizado">Federalizado</option>
         <option name="sostenimiento" value="Estatal">Estatal</option>
 
         <?php break;
-        case 'Federalizado': ?>
+        case 'Federal': ?>
         <option name="sostenimiento" value="Estatal - Federalizado">Estatal - Federalizado</option>
         <option name="sostenimiento" value="Federalizado" selected>Federalizado</option>
         <option name="sostenimiento" value="Estatal">Estatal</option>

@@ -88,6 +88,7 @@ class Encuesta extends CI_Controller {
       // echo "<pre>"; print_r($array_preguntas_ok); die();
       $data['array_preguntas'] = $array_preguntas_ok;
       $data['array_respuetas'] = $this->Respuestas_model->get_response($id_aplica);
+      $data['tipoUsuario'] = $tipo;
       // echo "<pre>";print_r($data);die();
       // $str_view_edit = $this->load->view("encuesta/editar", $data, TRUE);
       pagina_basica($this, "encuesta/editar", $data);

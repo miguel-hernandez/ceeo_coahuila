@@ -93,7 +93,13 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-          <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
+          <!-- <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a> -->
+           <?php   if ($tipoUsuario == 'ADMINISTRADOR' ) { ?>
+
+                <a href="<?= base_url('Administrador') ?>" class="btn btn-info btn-block">Regresar</a>
+              <?php } else {?>
+                <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
+              <?php } ?>
         </div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
             <button id="btn_encuesta_editar" type='button' class='btn btn-primary btn-block'>Guardar</button>

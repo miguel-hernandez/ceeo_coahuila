@@ -142,6 +142,7 @@
   		if (data) {
   		alert('El requerimiento se ha eliminado exitosamente');
   		traerArchivos(iduser);
+  		// console.log($('#p' + iduser).text());
   		}else{
   		alert('Error al eliminar');
   		}
