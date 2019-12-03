@@ -82,7 +82,7 @@ class Encuesta_model extends CI_Model {
 FROM respuesta res
 INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
 INNER JOIN usuario u on u.idusuario = ap.idusuario
-WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = {$idpregunta};";
+WHERE res.idaplicar = {$idaplicar}";
     // echo $str_query; die();
     return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario()
