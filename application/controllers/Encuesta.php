@@ -393,7 +393,7 @@ class Encuesta extends CI_Controller {
         array_push($array_preguntas_ok, $pregunta);
       }
       // echo "<pre>"; print_r( $pregunta['array_contesto']); die();
-        $nombreUsuario = $pregunta['array_contesto'][0]['Usuario'];
+        $nombreUsuario = $this->Encuesta_model->get_usuario($idaplicar);
       $array_final = array();
 
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {
@@ -420,7 +420,7 @@ class Encuesta extends CI_Controller {
       $data['array_datos'] = $array_final;
       $array_file = $this->Encuesta_model->get_file_path($idaplicar);
       $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';
-      $data['nombreUsuario'] = $nombreUsuario;
+      $data['nombreUsuario'] = $nombreUsuario[0]['Usuario'];
       $data['idaplicar'] = $idaplicar;
       $data['array_observaciones'] = $array_observaciones;
       // echo "<pre>"; print_r($data); die();
